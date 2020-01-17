@@ -5,7 +5,7 @@ Things done since last meeting:
 <ul>
     <li>User analysis: add user stories</li>
     <li>Get acquainted with the tech stack</li>
-<ul>
+</ul>
 
 Things to do this sprint:
 
