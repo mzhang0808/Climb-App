@@ -1,4 +1,6 @@
-#Daily Scrum Lecture 05
+# Daily Scrum Lecture 05
+
+Scribe: Albert Li
 
 Ganesh: Since our last meeting, I opened an issue to create a hello world program in React. I pushed the basic program onto the repo and created an issue to separate the front end and backend into different repos. I don't see any repos
 
