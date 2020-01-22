@@ -4,7 +4,7 @@ Scribe: Albert Li
 
 Ganesh: Since our last meeting, I opened an issue to create a hello world program in React. I pushed the basic program onto the repo and created an issue to separate the front end and backend into different repos. I don't see any repos
 
-Michael: I did basically the same thing as Ganesh. I created a hello world on React.js for the front end. I pushed it onto the repo. I see a road block because Ganesh is dragging me down. I still thing Ganesh is a severe step back of our group though.
+Michael: I did basically the same thing as Ganesh. I created a hello world on React.js for the front end. I pushed it onto the repo. 
 
 Cody: I reviewed the frameworks and I look forward to start working on this project.
 
