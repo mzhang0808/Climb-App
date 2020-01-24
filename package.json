@@ -2,6 +2,6 @@
   "name": "climb",
   "version": "1.0.0",
   "scripts": {
-    "start": "cd backend && node app.js"
+    "start": "cd backend && npm start"
   }
 }
