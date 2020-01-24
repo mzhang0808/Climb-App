@@ -8,13 +8,20 @@ function greet() {
 function bye() {
   alert('Johnson and Cody say Bye!');
 }
+function status() {
+	alert('Currently running');
+}
+
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <button onClick={greet}>
-          Say Hi to Ganesh and Michael
-        </button>
+          Michael and Ganesh say Hi  
+	</button>
+	<button onClick={stat}>
+	  Status
+	</button>
         <button onClick={bye}>
           Say Bye to Johnson and Cody
         </button>
