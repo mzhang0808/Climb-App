@@ -9,7 +9,7 @@ function bye() {
   alert('Johnson and Cody say Bye!');
 }
 function status() {
-	alert('Currently running');
+	alert('Hello World! Currently running!');
 }
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         <button onClick={greet}>
           Michael and Ganesh say Hi  
 	</button>
-	<button onClick={stat}>
+	<button onClick={status}>
 	  Status
 	</button>
         <button onClick={bye}>
