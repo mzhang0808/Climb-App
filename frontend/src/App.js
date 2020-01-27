@@ -17,13 +17,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         <button onClick={greet}>
-          Michael and Ganesh say Hi  
-	</button>
-	<button onClick={status}>
-	  Status
-	</button>
+          Say Hi to Michael and Johnson
+        </button>
         <button onClick={bye}>
           Say Bye to Johnson and Cody
+        </button>
+        <button onClick={status}>
+          Status
         </button>
       </header>
     </div>
