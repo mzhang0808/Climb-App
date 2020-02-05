@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 
+//Navigation bar for other pages on our webapp
 class NavBar extends Component {
   render() {
     return (
@@ -34,6 +35,7 @@ class NavBar extends Component {
   }
 }
 
+//Centerpiece of our home page and gives quick links for users (see user story)
 class Jumbotron extends Component {
   render() {
     return (
@@ -49,6 +51,8 @@ class Jumbotron extends Component {
     );
   }
 }
+
+//Renders page
 export default class App extends Component {
   render () {
     return (
