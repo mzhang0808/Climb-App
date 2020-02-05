@@ -3,12 +3,12 @@ var express = require('express');
 
 var app = express();
 
-const { Pool, Client } = require('pg')
+const { Pool } = require('pg')
 const pool = new Pool({
-  user: 'qjyqteuktgdkur',
-  host: 'ec2-23-21-13-88.compute-1.amazonaws.com',
-  database: 'd995g1c339k78d',
-  password: '02f4dcfe5c71902626923dfce5086de3c814000204268df9ac04eece3d8100ae',
+  user: 'xqdnhsvcdmopvx',
+  host: 'ec2-54-83-55-122.compute-1.amazonaws.com',
+  database: 'd1upulvgjib8qo',
+  password: '864e5bcd2441c503f96b5b7fc1fb218271d5a1accd2e430ebe85126cf8249f02',
   port: 5432,
   ssl: true
 })
@@ -20,9 +20,9 @@ app.get('/hello', function(req, res) {
 });
 
 app.get('/users', function(req, res) {
-  pool.query('SELECT * FROM users;', (err, res) => {
+  pool.query('SELECT * FROM users;', (err, response) => {
     if (err) throw err;
-    console.log(JSON.stringify(res.rows));
+    res.send(response.rows);
   });
 });
 
