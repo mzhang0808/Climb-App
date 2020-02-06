@@ -10,3 +10,15 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
+## API Endpoints
+
+### `/users`
+
+GET: returns a list of all users in heroku postgres database<br />
+POST: registers a user with fields name and password
+```
+{
+    "name": "johnson",
+    "password": "johnson"
+}
+```
