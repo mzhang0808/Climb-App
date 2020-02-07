@@ -31,22 +31,20 @@ Climb! is a web application that advances the climbing competition experience by
 
 ### Dependencies
 
-- React v6.13.4
-- React Router v6.13.4
-- React Router DOM v6.13.4
-- Axios v6.13.4
+- React (v6.13.4): Allows for the creation of web components for the frontend
+- React Router (v6.13.4): Allows for routing of pages in the frontend
+- React Router DOM (v6.13.4): Allows for routing of pages in the frontend
+- Axios (v6.13.4): Allows for creating and handling API calls to the backend
 
 ### Installation Steps
 
 TODO: Describe the installation process (making sure you give complete instructions to get your project going from scratch).
 Instructions need to be such that a user can just copy/paste the commands to get things set up and running. Note that with the use of GitHub Actions, these instructions can eventually be fully automated (e.g. with [act](https://github.com/nektos/act), you can run GitHub Actions locally). 
 
-
 ## Functionality
 
 TODO: Write usage instructions. Structuring it as a walkthrough can help structure this section,
 and showcase your features.
-
 
 ## Known Problems
 
