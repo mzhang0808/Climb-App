@@ -1,10 +1,59 @@
-## Deploying to Heroku 
+# Climb!
 
-In the root directory, you can run:
+## Project summary
 
-### `npm start`
+### One-sentence description of the project
 
-This corresponds to the start script in the root package.json. Currently, this start script only deploys the Node.js backend, but another command can be added to deploy the React frontend.
-The script is the command used by Heroku to deploy, thus only the backend is deployed at this time.
+Climb! is a web application that advances the climbing competition experience by automating the scoring and verification process involved.
 
-Heroku app deployed [here](https://cs48-climb.herokuapp.com/)
+### Additional information about the project
+
+**Target Audience**: Event coordinators and competitors in climbing competitions
+
+**Main Functionality**
+
+- Competitors can upload scores
+- Competitors can view automatically calculated results
+- Competitors can have climbing scores verified digitally
+- Competitors can view past competitions and scores
+- Competitors can register for competitions
+- Event coordinators can set up competitions
+- Event coordinators can specify the point distribution for a route
+- Event coordinators can designate judges
+
+## Installation
+
+### Prerequisites
+
+- Git
+- Node (v12.14.1)
+- PostgreSQL (v12.1)
+
+### Dependencies
+
+TODO: List which libraries / add-ons you added to the project, and the purpose each of those add-ons serves in your app.
+
+### Installation Steps
+
+TODO: Describe the installation process (making sure you give complete instructions to get your project going from scratch).
+Instructions need to be such that a user can just copy/paste the commands to get things set up and running. Note that with the use of GitHub Actions, these instructions can eventually be fully automated (e.g. with [act](https://github.com/nektos/act), you can run GitHub Actions locally). 
+
+
+## Functionality
+
+TODO: Write usage instructions. Structuring it as a walkthrough can help structure this section,
+and showcase your features.
+
+
+## Known Problems
+
+- None at the moment
+
+
+## Contributing
+
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
