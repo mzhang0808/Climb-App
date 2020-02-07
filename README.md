@@ -31,7 +31,10 @@ Climb! is a web application that advances the climbing competition experience by
 
 ### Dependencies
 
-TODO: List which libraries / add-ons you added to the project, and the purpose each of those add-ons serves in your app.
+- React v6.13.4
+- React Router v6.13.4
+- React Router DOM v6.13.4
+- Axios v6.13.4
 
 ### Installation Steps
 
