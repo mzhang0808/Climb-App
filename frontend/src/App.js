@@ -1,38 +1,24 @@
+// App.js
+// Routes to all other components
+
 import React, {Component} from 'react';
-import axios from 'axios';
-import './App.css';
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+
+// import other components
+import Home from './components/Home';
+import Competitions from './components/Competitions';
+import Scores from './components/Scores';
+
 
 export default class App extends Component {
-
-  greet() {
-    alert('Ganesh and Michael say Hi!');
-  }
-  
-  bye() {
-    alert('Johnson and Cody say Bye!');
-  }
-
-  async status() {
-    const response =
-    await axios.get("https://cs48-climb-backend.herokuapp.com/hello");
-    alert(response.data);
-  }
-
-  render () {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <button onClick={this.greet}>
-            Say Hi to Michael and Johnson
-          </button>
-          <button onClick={this.bye}>
-            Say Bye to Johnson and Cody
-          </button>
-          <button onClick={this.status}>
-            Status
-          </button>
-        </header>
-      </div>
-    );
+  render() {
+    // return router
+    return <Router>
+      <Switch>
+        <Route exact path="/" component={Home}></Route>
+        <Route path="/competitions" component={Competitions}></Route>
+        <Route path="/scores" component={Scores}></Route>
+      </Switch>
+    </Router>
   }
 }
