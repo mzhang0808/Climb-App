@@ -9,6 +9,7 @@ import Home from './components/Home';
 import Competitions from './components/Competitions';
 import Scores from './components/Scores';
 
+
 export default class App extends Component {
   render() {
     // return router
