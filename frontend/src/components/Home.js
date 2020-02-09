@@ -18,7 +18,7 @@ export default class Home extends Component {
                 <hr/>
                 <form action="/signup">
                   <div class="form-group">
-                    <button class="btn btn-default btn-lg">Get Started<i class="fa fa-hand-rock"></i></button>
+                    <button class="btn btn-default btn-lg">Get Started <i class="fa fa-hand-rock"></i></button>
                   </div>
                 </form>
               </div>

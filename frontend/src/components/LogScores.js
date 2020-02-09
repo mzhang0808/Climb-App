@@ -37,24 +37,35 @@ export default class LogScores extends Component {
     return (
       <>
         <NavBar></NavBar>
-        <form>
-          <div class="form-group">
-            <label for="competition">Competition Name</label>
-            <input type="text" class="form-control" id="competition" placeholder="Name" required/>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <form>
+                <div class="form-group">
+                  <label for="route">Route #</label>
+                  <input type="number" class="form-control" id="route" required/>
+                </div>
+                <div class="form-group">
+                  <label for="attempts">Attempts</label>
+                  <input type="number" class="form-control" id="attempts"required/>
+                </div>
+                <button type="submit" class="btn btn-default btn-lg" onClick={this.logScores}>Log Scores <i class="fa fa-hand-rock"></i></button>
+              </form>
+              <hr/>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Route #</th>
+                    <th scope="col">Attempts</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.table}
+                </tbody>
+              </table>
+            </div>
           </div>
-          <button type="submit" class="btn btn-default btn-lg" onClick={this.logScores}>Log Scores <i class="fa fa-hand-rock"></i></button>
-        </form>
-        <table class="table" id="opaque">
-          <thead>
-            <tr>
-              <th scope="col"># Route</th>
-              <th scope="col">Attempts</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.table}
-          </tbody>
-        </table>
+        </div>
       </>
     );
   }

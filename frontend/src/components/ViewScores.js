@@ -14,9 +14,11 @@ export default class ViewScores extends Component {
       data: 'Test',
       resultsTable: [],
     }
-    this.viewScores = this.viewScores.bind(this);
   }
 
+  componentWillMount() {
+    this.viewScores();
+  }
   // upon button click, call API to view scores
   viewScores() {
     axios.get("https://cs48-climb-backend.herokuapp.com/hello")
@@ -37,24 +39,23 @@ export default class ViewScores extends Component {
     return (
       <>
         <NavBar></NavBar>
-        <form>
-          <div class="form-group">
-            <label for="competition">Competition Name</label>
-            <input type="text" class="form-control" id="competition" placeholder="Name" required/>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Route #</th>
+                    <th>Attempts</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.resultsTable}
+                </tbody>
+              </table>
+            </div>
           </div>
-          <button type="submit" class="btn btn-default btn-lg" onClick={this.viewScores}>Join Competition <i class="fa fa-hand-rock"></i></button>
-        </form>
-        <table class="table" id="opaque">
-          <thead>
-            <tr>
-              <th scope="col"># Route</th>
-              <th scope="col">Attempts</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.resultsTable}
-          </tbody>
-        </table>
+        </div>
       </>
     );
   }

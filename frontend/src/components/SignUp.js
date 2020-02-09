@@ -29,21 +29,27 @@ export default class SignUp extends Component {
     return (
       <>
         <NavBar></NavBar>
-        <form>
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Username" required/>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <form>
+                <div class="form-group">
+                  <label for="username">Username</label>
+                  <input type="text" class="form-control" id="username" placeholder="Username" required/>
+                </div>
+                <div class="form-group">
+                  <label for="password1">Password</label>
+                  <input type="password" class="form-control" id="password1" placeholder="Password" required/>
+                </div>
+                <div class="form-group">
+                  <label for="password2">Confirm Password</label>
+                  <input type="password" class="form-control" id="password2" placeholder="Password" required/>
+                </div>
+                <button type="submit" class="btn btn-default btn-lg" onClick={this.logIn}>Sign Up <i class="fa fa-hand-rock"></i></button>
+              </form>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="password1">Password</label>
-            <input type="password" class="form-control" id="password1" placeholder="Password" required/>
-          </div>
-          <div class="form-group">
-            <label for="password2">Confirm Password</label>
-            <input type="password" class="form-control" id="password2" placeholder="Password" required/>
-          </div>
-          <button type="submit" class="btn btn-default btn-lg" onClick={this.logIn}>Sign Up <i class="fa fa-hand-rock"></i></button>
-        </form>
+        </div>
       </>
     );
   }

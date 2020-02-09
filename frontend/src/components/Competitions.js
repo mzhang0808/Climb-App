@@ -29,13 +29,19 @@ export default class Competition extends Component {
     return (
       <>
         <NavBar></NavBar>
-        <form>
-          <div class="form-group">
-            <label for="competition">Competition Name</label>
-            <input type="text" class="form-control" id="competition" placeholder="Name" required/>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <form>
+                <div class="form-group">
+                  <label for="competition">Competition Name</label>
+                  <input type="text" class="form-control" id="competition" placeholder="Name" required/>
+                </div>
+                <button type="submit" class="btn btn-default btn-lg" onClick={this.postScores}>Join Competition <i class="fa fa-hand-rock"></i></button>
+              </form>
+            </div>
           </div>
-          <button type="submit" class="btn btn-default btn-lg" onClick={this.postScores}>Join Competition <i class="fa fa-hand-rock"></i></button>
-        </form>
+        </div>
       </>
     );
   }
