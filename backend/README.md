@@ -22,3 +22,39 @@ POST: registers a user with fields name and password
     "password": "johnson"
 }
 ```
+
+### `/user/:name`
+
+GET: returns information given a user's name
+
+### `/competitions`
+
+GET: returns a list of competitions
+POST: register a competition with fields name and # of problems
+```
+{
+    "comp_name": "UCSB_2020_w20_comp1",
+    "num_of_problems": 45 
+}
+```
+
+### `/scores`
+
+GET: returns a list of scores where each entry has user name, competition name, and climbs completed (problem num, # of attempts)
+POST: updates the users current_comp field and adds the corresponding user to the scores table
+```
+{
+    "user_name": "Bob",
+    "comp": "World's Largest Soil-based Buritto"
+}
+```
+
+### `/scores/:name/:comp`
+
+PATCH: records a completed climb for given name and comp and updates corresponding score
+```
+{
+    "problem": 5,
+    "attempts": 12
+}
+```
