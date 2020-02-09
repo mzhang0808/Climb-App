@@ -18,7 +18,7 @@ GET: returns a list of all users in heroku postgres database<br />
 POST: registers a user with fields name and password
 ```
 {
-    "name": "johnson",
+    "user_name": "johnson",
     "password": "johnson"
 }
 ```
