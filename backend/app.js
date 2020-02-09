@@ -30,10 +30,12 @@ app.get('/users', function(req, res) {
 });
 
 app.post('/users', function(req, res) {
-  var user = req.body.name;
+  var user = req.body.user_name;
   var pass = req.body.password;
-  pool.query("INSERT INTO users (name, password) VALUES ('"+user+"', '"+pass+"');", (err, response) => {
-    if (err) throw err;
+  pool.query("INSERT INTO users (user_name, password) VALUES ('"+user+"', '"+pass+"');", (err, response) => {
+    if (err){
+      res.send(err);
+    }
     res.send(response);
   });
 });
