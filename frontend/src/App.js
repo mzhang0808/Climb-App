@@ -6,8 +6,11 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 
 // import other components
 import Home from './components/Home';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
 import Competitions from './components/Competitions';
-import Scores from './components/Scores';
+import LogScores from './components/LogScores';
+import ViewScores from './components/ViewScores';
 
 
 export default class App extends Component {
@@ -16,8 +19,11 @@ export default class App extends Component {
     return <Router>
       <Switch>
         <Route exact path="/" component={Home}></Route>
+        <Route path="/login" component={Login}></Route>
+        <Route path="/signup" component={SignUp}></Route>
         <Route path="/competitions" component={Competitions}></Route>
-        <Route path="/scores" component={Scores}></Route>
+        <Route path="/scores/log" component={LogScores}></Route>
+        <Route path="/scores/view" component={ViewScores}></Route>
       </Switch>
     </Router>
   }

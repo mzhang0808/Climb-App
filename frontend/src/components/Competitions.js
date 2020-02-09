@@ -1,11 +1,14 @@
 // Competitions.js
-// outputs table of competitions
+// Form for user to upload scores
+// Fields:
+// Comp Name
+// Score info
 
 import React, {Component} from 'react';
 import axios from 'axios';
 import NavBar from './NavBar';
 
-export default class Competitions extends Component {
+export default class Competition extends Component {
 
   // set state
   constructor(props) {
@@ -13,11 +16,11 @@ export default class Competitions extends Component {
     this.state = {
       data: 'Test'
     }
-    this.getCompetitions = this.getCompetitions.bind(this);
+    this.postCompetition = this.postCompetition.bind(this);
   }
 
-  // upon button click, call API to get a list of competitions
-  getCompetitions() {
+  // upon button click, call API to upload scores
+  postCompetition() {
     axios.get("https://cs48-climb-backend.herokuapp.com/hello")
     .then(response => this.setState({data: response.data}));
   }
@@ -26,8 +29,13 @@ export default class Competitions extends Component {
     return (
       <>
         <NavBar></NavBar>
-        <button class="btn btn-default btn-lg" onClick={this.getCompetitions}>Get Competitions</button>
-        <p>{this.state.data}</p>
+        <form>
+          <div class="form-group">
+            <label for="competition">Competition Name</label>
+            <input type="text" class="form-control" id="competition" placeholder="Name" required/>
+          </div>
+          <button type="submit" class="btn btn-default btn-lg" onClick={this.postScores}>Join Competition <i class="fa fa-hand-rock"></i></button>
+        </form>
       </>
     );
   }

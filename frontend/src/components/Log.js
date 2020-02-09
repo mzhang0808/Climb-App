@@ -1,11 +1,11 @@
-// Scores.js
-// outputs table of scores
+// Log.js
+// outputs tablulated score data
 
 import React, {Component} from 'react';
 import axios from 'axios';
 import NavBar from './NavBar';
 
-export default class Competitions extends Component {
+export default class Scores extends Component {
 
   // set state
   constructor(props) {
@@ -16,7 +16,7 @@ export default class Competitions extends Component {
     this.getScores = this.getScores.bind(this);
   }
 
-  // upon button click, call API to get list of scores
+  // upon button click, call API to view scores
   getScores() {
     axios.get("https://cs48-climb-backend.herokuapp.com/hello")
     .then(response => this.setState({data: response.data}));
@@ -26,7 +26,7 @@ export default class Competitions extends Component {
     return (
       <>
         <NavBar></NavBar>
-        <button class="btn btn-default btn-lg" onClick={this.getScores}>Get Scores</button>
+        <button class="btn btn-default btn-lg" onClick={this.getScores}>View Scores <i class="fa fa-hand-rock"></i></button>
         <p>{this.state.data}</p>
       </>
     );

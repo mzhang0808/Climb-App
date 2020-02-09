@@ -13,12 +13,13 @@ export default class HomePage extends Component {
         </div>
         <div class="collapse navbar-collapse" id="bs-nav-demo">
           <ul class="nav navbar-nav">
-            <li><a href="competitions">Competitions</a></li>
-            <li><a href="scores">Scores</a></li>
+            <li><a href="/competitions">Competitions</a></li>
+            <li><a href="/scores/log">Log Scores</a></li>
+            <li><a href="/scores/view">View Scores</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="signup">Sign Up <i class="fa fa-user-plus"></i></a></li>
-            <li><a href="login">Log In <i class="fa fa-user"></i></a></li>
+            <li><a href="/signup">Sign Up <i class="fa fa-user-plus"></i></a></li>
+            <li><a href="/login">Log In <i class="fa fa-user"></i></a></li>
           </ul>
         </div>
       </div>

@@ -24,6 +24,11 @@ html{
 				0px 18px 23px rgba(0,0,0,0.1);
 }
 
+#opaque{
+	background:white;
+	color:black;
+}
+
 h1{
 	font-weight:700;
 	font-size:5em;
