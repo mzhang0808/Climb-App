@@ -21,7 +21,7 @@ export default class SignUp extends Component {
 
   // upon button click, call API to get a list of competitions
   signUp() {
-    axios.get("https://cs48-climb-backend.herokuapp.com/hello")
+    axios.get("https://cs48-climb-backend.herokuapp.com/users")
     .then(response => this.setState({data: response.data}));
   }
 
