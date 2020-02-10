@@ -58,7 +58,7 @@ export default class JoinCompetition extends Component {
                   <input 
                     type="text" 
                     class="form-control" 
-                    name="comp_name"
+                    name="comp"
                     placeholder="Competition"
                     onChange={this.onChangeHandler} 
                     required/>
