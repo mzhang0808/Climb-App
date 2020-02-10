@@ -13,7 +13,8 @@ export default class HomePage extends Component {
         </div>
         <div class="collapse navbar-collapse" id="bs-nav-demo">
           <ul class="nav navbar-nav">
-            <li><a href="/competitions">Competitions</a></li>
+            <li><a href="/competitions/create">Create Competition</a></li>
+            <li><a href="/competitions/join">Join Competition</a></li>
             <li><a href="/scores/log">Log Scores</a></li>
             <li><a href="/scores/view">View Scores</a></li>
           </ul>

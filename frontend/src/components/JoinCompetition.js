@@ -1,19 +1,20 @@
-// Signup.js
-// Signs a user up
+// JoinCompetition.js
+// Joins competition
 
 import React, {Component} from 'react';
 import axios from 'axios';
 import NavBar from './NavBar';
 
-export default class Signup extends Component {
+export default class JoinCompetition extends Component {
 
   // Set state
   constructor(props) {
     super(props);
     this.state = {
-      username: null,
-      password: null,
+      user_name: null,
+      comp: null,
     };
+
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
   }
@@ -25,13 +26,13 @@ export default class Signup extends Component {
     this.setState({[key]: value});
   }
 
-  // Upon submission, call API
+  // Make API call
   onSubmitHandler(event) {
     event.preventDefault();
-    axios.post("https://cs48-climb-backend.herokuapp.com/users", {
-      user_name: this.state.username, 
-      password: this.state.password
-    }).then(response => console.log(response));
+    axios.post("https://cs48-climb-backend.herokuapp.com/scores", {
+      user_name: this.state.user_name,
+      comp: this.state.comp
+    }).then(response => this.setState({data: response.status}));
   }
 
   render() {
@@ -47,23 +48,25 @@ export default class Signup extends Component {
                   <input 
                     type="text" 
                     class="form-control" 
-                    name="username" 
-                    placeholder="Username" 
+                    name="user_name" 
+                    placeholder="Username"
                     onChange={this.onChangeHandler} 
                     required/>
                 </div>
                 <div class="form-group">
-                  <label>Password</label>
+                  <label>Competition Name</label>
                   <input 
-                    type="password" 
+                    type="text" 
                     class="form-control" 
-                    name="password" 
-                    placeholder="Name" 
+                    name="comp_name"
+                    placeholder="Competition"
                     onChange={this.onChangeHandler} 
                     required/>
                 </div>
-                <button type="submit" class="btn btn-default btn-lg">Sign Up <i class="fa fa-hand-rock"></i></button>
+                <button type="submit" class="btn btn-default btn-lg">Join Competition <i class="fa fa-hand-rock"></i></button>
               </form>
+              <hr/>
+              <pre>{this.state.data}</pre>
             </div>
           </div>
         </div>

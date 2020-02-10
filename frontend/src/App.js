@@ -1,5 +1,5 @@
 // App.js
-// Routes to all other components
+// Routes to other components
 
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
@@ -7,21 +7,23 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 // import other components
 import Home from './components/Home';
 import Login from './components/Login';
-import SignUp from './components/SignUp';
-import Competitions from './components/Competitions';
+import Signup from './components/Signup';
+import CreateCompetition from './components/CreateCompetition';
+import JoinCompetition from './components/JoinCompetition';
 import LogScores from './components/LogScores';
 import ViewScores from './components/ViewScores';
 
 
 export default class App extends Component {
   render() {
-    // return router
+    // return Router
     return <Router>
       <Switch>
         <Route exact path="/" component={Home}></Route>
         <Route path="/login" component={Login}></Route>
-        <Route path="/signup" component={SignUp}></Route>
-        <Route path="/competitions" component={Competitions}></Route>
+        <Route path="/signup" component={Signup}></Route>
+        <Route path="/competitions/create" component={CreateCompetition}></Route>
+        <Route path="/competitions/join" component={JoinCompetition}></Route>
         <Route path="/scores/log" component={LogScores}></Route>
         <Route path="/scores/view" component={ViewScores}></Route>
       </Switch>

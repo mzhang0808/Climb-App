@@ -1,8 +1,5 @@
 // Login.js
-// Form to log in
-// Fields:
-// Username
-// Password
+// Logs a user in
 
 import React, {Component} from 'react';
 import axios from 'axios';
@@ -10,19 +7,30 @@ import NavBar from './NavBar';
 
 export default class Login extends Component {
 
-  // set state
+  // Set state
   constructor(props) {
     super(props);
     this.state = {
-      data: 'Test'
-    }
-    this.login = this.login.bind(this);
+      username: null,
+      password: null,
+      data: null,
+    };
+    this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.onSubmitHandler = this.onSubmitHandler.bind(this);
   }
 
-  // upon button click, call API to get a list of competitions
-  login() {
-    axios.get("https://cs48-climb-backend.herokuapp.com/users")
-    .then(response => this.setState({data: response.data}));
+  // Modify state
+  onChangeHandler(event) {
+    let key = event.target.name;
+    let value = event.target.value;
+    this.setState({[key]: value});
+  }
+
+  // Upon submission, call API
+  onSubmitHandler(event) {
+    event.preventDefault();
+    let url = "https://cs48-climb-backend.herokuapp.com/users/" + this.state.username;
+    axios.get(url).then(response => this.setState({data: response.status}));
   }
 
   render() {
@@ -32,24 +40,31 @@ export default class Login extends Component {
         <div class="container">
           <div class="row">
             <div class="col-lg-12">
-              <form>
+              <form onSubmit={this.onSubmitHandler}>
                 <div class="form-group">
-                  <label for="username">Username</label>
-                  <input type="text" class="form-control" id="username" placeholder="Username" required/>
+                  <label>Username</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    name="username" 
+                    placeholder="Username" 
+                    onChange={this.onChangeHandler} 
+                    required/>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password" required/>
+                  <label>Password</label>
+                  <input 
+                    type="password" 
+                    class="form-control" 
+                    name="password" 
+                    placeholder="Name" 
+                    onChange={this.onChangeHandler} 
+                    required/>
                 </div>
-                <button type="submit" class="btn btn-default btn-lg" onClick={this.login}>Log In <i class="fa fa-hand-rock"></i></button>
+                <button type="submit" class="btn btn-default btn-lg">Login <i class="fa fa-hand-rock"></i></button>
               </form>
-              <br />
-              <form action="/signup">
-                <div class="form-group">
-                  <p for="username">Don't have an account?</p>
-                  <button type="submit" class="btn btn-default btn-lg" onClick={this.login}>Sign Up <i class="fa fa-hand-rock"></i></button>
-                </div>
-              </form>
+              <hr/>
+              <pre>{this.state.data}</pre>
             </div>
           </div>
         </div>

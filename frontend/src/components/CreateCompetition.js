@@ -1,19 +1,20 @@
-// Signup.js
-// Signs a user up
+// CreateCompetition.js
+// Creates competition
 
 import React, {Component} from 'react';
 import axios from 'axios';
 import NavBar from './NavBar';
 
-export default class Signup extends Component {
+export default class CreateCompetition extends Component {
 
   // Set state
   constructor(props) {
     super(props);
     this.state = {
-      username: null,
-      password: null,
+      comp_name: null,
+      num_of_problems: null,
     };
+
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
   }
@@ -25,13 +26,13 @@ export default class Signup extends Component {
     this.setState({[key]: value});
   }
 
-  // Upon submission, call API
+  // Make API call
   onSubmitHandler(event) {
     event.preventDefault();
-    axios.post("https://cs48-climb-backend.herokuapp.com/users", {
-      user_name: this.state.username, 
-      password: this.state.password
-    }).then(response => console.log(response));
+    axios.post("https://cs48-climb-backend.herokuapp.com/competitions", {
+      comp_name: this.state.comp_name,
+      num_of_problems: this.state.num_of_problems
+    }).then(response => this.setState({data: response.status}));
   }
 
   render() {
@@ -43,27 +44,28 @@ export default class Signup extends Component {
             <div class="col-lg-12">
               <form onSubmit={this.onSubmitHandler}>
                 <div class="form-group">
-                  <label>Username</label>
+                  <label>Competition Name</label>
                   <input 
                     type="text" 
                     class="form-control" 
-                    name="username" 
-                    placeholder="Username" 
+                    name="comp_name" 
+                    placeholder="Name"
                     onChange={this.onChangeHandler} 
                     required/>
                 </div>
                 <div class="form-group">
-                  <label>Password</label>
+                  <label># of Routes</label>
                   <input 
-                    type="password" 
+                    type="number" 
                     class="form-control" 
-                    name="password" 
-                    placeholder="Name" 
+                    name="num_of_problems"
                     onChange={this.onChangeHandler} 
                     required/>
                 </div>
-                <button type="submit" class="btn btn-default btn-lg">Sign Up <i class="fa fa-hand-rock"></i></button>
+                <button type="submit" class="btn btn-default btn-lg">Create Competition <i class="fa fa-hand-rock"></i></button>
               </form>
+              <hr/>
+              <pre>{this.state.data}</pre>
             </div>
           </div>
         </div>

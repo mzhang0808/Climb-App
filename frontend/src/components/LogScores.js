@@ -1,4 +1,4 @@
-// Log.js
+// LogScores.js
 // outputs tablulated score data
 
 import React, {Component} from 'react';
@@ -7,7 +7,7 @@ import NavBar from './NavBar';
 
 export default class LogScores extends Component {
 
-  // set state
+  // Set State
   constructor(props) {
     super(props);
     this.state = {
@@ -15,43 +15,27 @@ export default class LogScores extends Component {
       competition: null,
       problem: null,
       attempts: null,
+      data: null
     }
-    this.handleUsername = this.handleUsername.bind(this);
-    this.handleCompetition = this.handleCompetition.bind(this);
-    this.handleProblem = this.handleProblem.bind(this);
-    this.handleAttempts = this.handleAttempts.bind(this);
-    this.logScores = this.logScores.bind(this);
+    this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.onSubmitHandler = this.onSubmitHandler.bind(this);
   }
 
-  handleUsername(event) {
-    this.setState({username: event.target.value});
+  // Modify state
+  onChangeHandler(event) {
+    let key = event.target.name;
+    let value = event.target.value;
+    this.setState({[key]: value});
   }
 
-  handleCompetition(event) {
-    this.setState({competition: event.target.value});
-  }
-
-  handleProblem(event) {
-    this.setState({problem: event.target.value});
-  }
-
-  handleAttempts(event) {
-    this.setState({attempts: event.target.value});
-  }
-
-  // upon button click, call API to view scores
-  logScores(event) {
-    alert(this.state.username);
-    axios.post("https://cs48-climb-backend.herokuapp.com/scores", {
-      user_name: this.state.username,
-      comp: this.state.competition
-    });
-
+  // Upon submission, call API
+  onSubmitHandler(event) {
+    event.preventDefault();
     let url = "https://cs48-climb-backend.herokuapp.com/" + this.state.username + "/" + this.state.competition;
     axios.patch(url, {
       problem: this.state.problem,
       attempts: this.state.attempts
-    })
+    }).then(response => this.setState({data: response.status}));
   }
 
   render() {
@@ -61,22 +45,44 @@ export default class LogScores extends Component {
         <div class="container">
           <div class="row">
             <div class="col-lg-12">
-              <form onSubmit={this.logScores}>
+              <form onSubmit={this.onSubmitHandler}>
                 <div class="form-group">
-                  <label for="username">Username</label>
-                  <input type="text" class="form-control" id="username" placeholder="Username" onChange={this.handleUsername} required/>
+                  <label>Username</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    name="username" 
+                    placeholder="Username" 
+                    onChange={this.onChangeHandler} 
+                    required/>
                 </div>
                 <div class="form-group">
-                  <label for="competition">Competition Name</label>
-                  <input type="text" class="form-control" id="competition" placeholder="Name" onChange={this.handleCompetition} required/>
+                  <label>Competition Name</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    name="competition" 
+                    placeholder="Name" 
+                    onChange={this.onChangeHandler} 
+                    required/>
                 </div>
                 <div class="form-group">
-                  <label for="problem">Route #</label>
-                  <input type="number" class="form-control" id="problem" onChange={this.handleProblem} required/>
+                  <label>Route #</label>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    name="problem" 
+                    onChange={this.onChangeHandler} 
+                    required/>
                 </div>
                 <div class="form-group">
-                  <label for="attempts">Attempts</label>
-                  <input type="number" class="form-control" id="attempts" onChange={this.handleAttempts} required/>
+                  <label>Attempts</label>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    name="attempts" 
+                    onChange={this.onChangeHandler} 
+                    required/>
                 </div>
                 <button type="submit" class="btn btn-default btn-lg">Log Scores <i class="fa fa-hand-rock"></i></button>
               </form>
@@ -89,9 +95,9 @@ export default class LogScores extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.table}
                 </tbody>
               </table>
+              <pre>{this.state.data}</pre>
             </div>
           </div>
         </div>
