@@ -1,5 +1,5 @@
-// Scores.js
-// outputs table of scores
+// Signup.js
+// Signs a user up
 
 import React, {Component} from 'react';
 import axios from 'axios';
@@ -7,50 +7,66 @@ import NavBar from './NavBar';
 
 export default class Signup extends Component {
 
-  // set state
+  // Set state
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: null,
+      password: null,
     };
-    this.signup = this.signup.bind(this);
+    this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.onSubmitHandler = this.onSubmitHandler.bind(this);
   }
 
-  // upon button click, call API to get list of scores
-  signup(event) {
+  // Modify state
+  onChangeHandler(event) {
+    let key = event.target.name;
+    let value = event.target.value;
+    this.setState({[key]: value});
+  }
+
+  // Upon submission, call API
+  onSubmitHandler(event) {
     event.preventDefault();
-    axios.post("https://cs48-climb-backend.herokuapp.com/users", {user_name: this.state.username, password: this.state.password})
-     .then(response => console.log(response));
-  }
-
-  myChangeHandler = (event) => {
-    let nam = event.target.name;
-    let val = event.target.value;
-    this.setState({[nam]: val});
+    axios.post("https://cs48-climb-backend.herokuapp.com/users", {
+      user_name: this.state.username, 
+      password: this.state.password
+    }).then(response => console.log(response));
   }
 
   render() {
     return (
       <>
         <NavBar></NavBar>
-          <form onSubmit={this.signup}>
-          <p>Enter your username:</p>
-          <input
-            type='text'
-            name='username'
-            onChange={this.myChangeHandler}
-          />
-          <p>Enter your password:</p>
-          <input
-            type='text'
-            name='password'
-            onChange={this.myChangeHandler}
-          />
-          <input
-            type='submit'
-          />
-          </form>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <form onSubmit={this.onSubmitHandler}>
+                <div class="form-group">
+                  <label>Username</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    name="username" 
+                    placeholder="Username" 
+                    onChange={this.onChangeHandler} 
+                    required/>
+                </div>
+                <div class="form-group">
+                  <label>Password</label>
+                  <input 
+                    type="password" 
+                    class="form-control" 
+                    name="password" 
+                    placeholder="Name" 
+                    onChange={this.onChangeHandler} 
+                    required/>
+                </div>
+                <button type="submit" class="btn btn-default btn-lg">Sign Up <i class="fa fa-hand-rock"></i></button>
+              </form>
+            </div>
+          </div>
+        </div>
       </>
     );
   }
