@@ -88,12 +88,23 @@ app.post('/scores', function(req, res) {
   });
 });
 
+app.get('/scores/:name/:comp', function(req, res) {
+    pool.query("SELECT problems FROM scores where user_name='"+req.params.name+"' and comp='"+req.params.comp+"';", (err, response) => {
+      if (err) throw err;
+      var problems = JSON.parse(response.rows[0].problems.split("\"(").join("[").split(")\"").join("]").split("{").join("[").split("}").join("]"));
+      var sorted = problems.sort(function(a, b){
+        return b[0] - a[0];
+      })
+      res.send(problems);
+    });
+});
+
 app.patch('/scores/:name/:comp', function(req, res) {
   var problem = req.body.problem;
   var attempts = req.body.attempts;
 
   pool.query("UPDATE scores SET problems[CARDINALITY(problems)+1] = ROW("+ problem +","+ attempts +") where user_name= '"+ req.params.name + "' and comp= '"+ req.params.comp +"';", (err, response) => {
-    
+
     if (err){
       res.send(err);
     }
