@@ -15,8 +15,13 @@ export default class LogScores extends Component {
       competition: null,
       problem: null,
       attempts: null,
-      data: null
+      data: [],
     }
+
+    this.scores = [];
+    this.allScores = [];
+    this.table = [];
+
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
   }
@@ -31,14 +36,44 @@ export default class LogScores extends Component {
   // Upon submission, call API
   onSubmitHandler(event) {
     event.preventDefault();
-    let url = "https://cs48-climb-backend.herokuapp.com/" + this.state.username + "/" + this.state.competition;
+    let url = "https://cs48-climb-backend.herokuapp.com/scores/" + this.state.username + "/" + this.state.competition;
     axios.patch(url, {
       problem: this.state.problem,
       attempts: this.state.attempts
-    }).then(response => this.setState({data: response.status}));
+    })
+
+    axios.get("https://cs48-climb-backend.herokuapp.com/scores/"
+    ).then(response => this.setState({data: response.data}));
   }
 
   render() {
+
+    for(let i = 0; i < this.state.data.length; i++) {
+      let score = this.state.data[i];
+      let user_name = score.user_name.replace(' ', '').trim();
+      let comp = score.comp.replace(' ', '').trim();
+      if(user_name == this.state.username) {
+        this.allScores.push(score);
+        if(comp == this.state.competition) {
+          this.scores.push(score);
+        }
+      }
+    }
+    
+    this.table = this.scores.map((item, key) => 
+      <tr>
+        <td>{item.comp}</td>
+        <td>{item.problems}</td>
+      </tr>
+    );
+
+    this.allTable = this.allScores.map((item, key) =>
+      <tr>
+        <td>{item.comp}</td>
+        <td>{item.problems}</td>
+      </tr>
+    );
+
     return (
       <>
         <NavBar></NavBar>
@@ -87,17 +122,30 @@ export default class LogScores extends Component {
                 <button type="submit" class="btn btn-default btn-lg">Log Scores <i class="fa fa-hand-rock"></i></button>
               </form>
               <hr/>
+              <h3>Scores for this Competition</h3>
               <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Route #</th>
-                    <th scope="col">Attempts</th>
+                    <th scope="col">Competition</th>
+                    <th scope="col">Scores</th>
                   </tr>
                 </thead>
                 <tbody>
+                  {this.table}
                 </tbody>
               </table>
-              <pre>{this.state.data}</pre>
+              <h3>Scores for all Competitions</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Competition</th>
+                    <th scope="col">Scores</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.allTable}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
