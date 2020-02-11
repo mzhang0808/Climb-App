@@ -13,7 +13,6 @@ import JoinCompetition from './components/JoinCompetition';
 import LogScores from './components/LogScores';
 import ViewScores from './components/ViewScores';
 
-
 export default class App extends Component {
   render() {
     // return Router

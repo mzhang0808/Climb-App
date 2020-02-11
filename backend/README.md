@@ -51,6 +51,7 @@ POST: updates the users current_comp field and adds the corresponding user to th
 
 ### `/scores/:name/:comp`
 
+GET: returns list of scores from a competition, sorted by route difficulty
 PATCH: records a completed climb for given name and comp and updates corresponding score
 ```
 {
