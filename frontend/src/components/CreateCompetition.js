@@ -64,8 +64,6 @@ export default class CreateCompetition extends Component {
                 </div>
                 <button type="submit" class="btn btn-default btn-lg">Create Competition <i class="fa fa-hand-rock"></i></button>
               </form>
-              <hr/>
-              <pre>{this.state.data}</pre>
             </div>
           </div>
         </div>

@@ -65,8 +65,6 @@ export default class JoinCompetition extends Component {
                 </div>
                 <button type="submit" class="btn btn-default btn-lg">Join Competition <i class="fa fa-hand-rock"></i></button>
               </form>
-              <hr/>
-              <pre>{this.state.data}</pre>
             </div>
           </div>
         </div>

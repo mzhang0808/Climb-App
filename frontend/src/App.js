@@ -2,7 +2,7 @@
 // Routes to other components
 
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 // import other components
 import Home from './components/Home';

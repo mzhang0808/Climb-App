@@ -16,7 +16,7 @@ export default class Home extends Component {
                 <h1>Climb!</h1>
                 <h3>Climbing &mdash; easier than ever before.</h3>
                 <hr/>
-                <form action="/signup">
+                <form onSubmit="/signup">
                   <div class="form-group">
                     <button class="btn btn-default btn-lg">Get Started <i class="fa fa-hand-rock"></i></button>
                   </div>

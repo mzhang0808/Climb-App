@@ -52,9 +52,9 @@ export default class LogScores extends Component {
       let score = this.state.data[i];
       let user_name = score.user_name.replace(' ', '').trim();
       let comp = score.comp.replace(' ', '').trim();
-      if(user_name == this.state.username) {
+      if(user_name === this.state.username) {
         this.allScores.push(score);
-        if(comp == this.state.competition) {
+        if(comp === this.state.competition) {
           this.scores.push(score);
         }
       }
