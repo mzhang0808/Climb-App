@@ -17,15 +17,13 @@ Climb! is a web application that advances the climbing competition experience by
 - Competitors can have climbing scores verified digitally
 - Competitors can view past competitions and scores
 - Competitors can register for competitions
-- Event coordinators can set up competitions
-- Event coordinators can specify the point distribution for a route
-- Event coordinators can designate judges
 
 ## Installation
 
 ### Prerequisites
 
-- Git
+- Git (v2.21.1)
+- Heroku (v7.38.0)
 - Node (v12.14.1)
 - PostgreSQL (v12.1)
 
@@ -43,12 +41,32 @@ Instructions need to be such that a user can just copy/paste the commands to get
 
 ## Functionality
 
-TODO: Write usage instructions. Structuring it as a walkthrough can help structure this section,
-and showcase your features.
+Here are our <a href="cs48-climb-frontend.herokuapp.com">frontend</a> and <a href="cs48-climb-backend.herokuapp.com">backend</a> in production.
+
+**Frontend**
+
+Testing the web application on localhost:
+1. Navigate to the <code>frontend</code> subdirectory:
+<pre>cd frontend</pre>
+2. Install necessary dependencies:
+<pre>npm install</pre>
+3. Start the web server:
+<pre>npm start</pre>
+
+Deploying the web application on Heroku:
+1. Configure the Heroku deployment:
+<pre>
+cd ..
+heroku login
+heroku git:remote -a [my-app-name]
+</pre>
+2. Push the web application to Heroku:
+<pre>git subtree push --prefix frontend heroku master</pre>
 
 ## Known Problems
 
-- None at the moment
+- On the frontend's /log/scores webpage, the JSON response is not formatted properly, so all scores are only shown as a string in the table
+- On the frontend, there have been glitches in remembering whether the user is logged in or not.
 
 
 ## Contributing
