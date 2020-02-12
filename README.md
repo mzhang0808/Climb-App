@@ -36,13 +36,6 @@ Climb! is a web application that advances the climbing competition experience by
 
 ### Installation Steps
 
-TODO: Describe the installation process (making sure you give complete instructions to get your project going from scratch).
-Instructions need to be such that a user can just copy/paste the commands to get things set up and running. Note that with the use of GitHub Actions, these instructions can eventually be fully automated (e.g. with [act](https://github.com/nektos/act), you can run GitHub Actions locally). 
-
-## Functionality
-
-Here are our <a href="cs48-climb-frontend.herokuapp.com">frontend</a> and <a href="cs48-climb-backend.herokuapp.com">backend</a> in production.
-
 **Frontend**
 
 Testing the web application on localhost:
@@ -62,6 +55,16 @@ heroku git:remote -a [my-app-name]
 </pre>
 2. Push the web application to Heroku:
 <pre>git subtree push --prefix frontend heroku master</pre>
+
+## Functionality
+
+Here are our <a href="cs48-climb-frontend.herokuapp.com">frontend</a> and <a href="cs48-climb-backend.herokuapp.com">backend</a> in production.
+
+- Navigate to the homepage.
+- Click on "Get Started" or "Sign Up" and create an account. If you already have an account, click on "Log In" and log in.
+- Click on "Create Competition" and create a competition. If a competition already exists, click on "Join Competition" and join the competition.
+- Click on "Log Scores" and log scores for a given competition and route.
+- Click on "View Scores" and view the top 3 scores for a given competition.
 
 ## Known Problems
 
