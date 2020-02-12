@@ -74,6 +74,20 @@ heroku git:remote -a [my-app-name]
 2. Push the web application to Heroku:
 <pre>git subtree push --prefix backend heroku master</pre>
 
+**Database setup**
+
+Once you have set up the backend with Heroku, you can add database functionality.
+
+1. Navigate to the resources tab under your Heroku application and look for Heroku Postgres in the Add-ons search bar. Provision Postgres for your application with the Hobby Dev plan. <br/>
+
+2. You can access the database from terminal with the following command (make sure you are logged into Heroku):
+
+<pre>heroku pg:psql -a your-application-name</pre>
+
+3. We have provided our schema in database.sql (copy-paste this inside the Heroku Postgres terminal). <br/>
+
+4. Once this is complete, you must copy over the config.example.js file into a new file named config.js and alter the fields to match the database configurations (username, host, password, etc) on Heroku. These can be found by clicking on the Heroku Postgres option under Add-ons, then selecting Database Credentials under the Settings tab. Without this step, the Node.js server will not know what database to query.
+
 
 ## Functionality
 
