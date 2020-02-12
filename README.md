@@ -50,8 +50,8 @@ Testing the web application on localhost:
 <pre>cd frontend</pre>
 2. Install necessary dependencies:
 <pre>npm install</pre>
-Start the web server:
-3. <pre>npm start</pre>
+3. Start the web server:
+<pre>npm start</pre>
 
 Deploying the web application on Heroku:
 1. Configure the Heroku deployment:
