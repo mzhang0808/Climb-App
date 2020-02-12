@@ -22,7 +22,7 @@ Climb! is a web application that advances the climbing competition experience by
 
 ### Prerequisites
 
-- Git
+- Git (v2.21.1)
 - Heroku (v7.38.0)
 - Node (v12.14.1)
 - PostgreSQL (v12.1)
