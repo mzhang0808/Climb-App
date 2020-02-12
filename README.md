@@ -56,6 +56,25 @@ heroku git:remote -a [my-app-name]
 2. Push the web application to Heroku:
 <pre>git subtree push --prefix frontend heroku master</pre>
 
+**Backend**
+
+Testing the web application on localhost:
+1. Navigate to the <code>backend</code> subdirectory:
+<pre>cd backend</pre>
+2. Start the web server (this installs necessary dependencies as well):
+<pre>npm start</pre>
+
+Deploying the web application on Heroku:
+1. Configure the Heroku deployment:
+<pre>
+cd ..
+heroku login
+heroku git:remote -a [my-app-name]
+</pre>
+2. Push the web application to Heroku:
+<pre>git subtree push --prefix backend heroku master</pre>
+
+
 ## Functionality
 
 Here are our <a href="cs48-climb-frontend.herokuapp.com">frontend</a> and <a href="cs48-climb-backend.herokuapp.com">backend</a> in production.
