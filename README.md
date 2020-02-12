@@ -65,7 +65,9 @@ heroku git:remote -a [my-app-name]
 
 ## Known Problems
 
-- On the frontend, the JSON response is not formatted properly, so all scores are only shown as a string
+- On the frontend's /log/scores webpage, the JSON response is not formatted properly, so all scores are only shown as a string in the table
+- On the frontend, there have been glitches in remembering whether the user is logged in or not.
+
 
 ## Contributing
 
