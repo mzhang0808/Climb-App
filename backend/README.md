@@ -1,7 +1,3 @@
-## Local Setup/Development
-
-Our application database is hosted using Heroku Postgres. We have provided our schema in database.sql so you can set up the tables wherever you want to host the database. You must also copy over the config.example.js file into a new file named config.js and alter the fields to match the database configurations (username, host, password, etc)
-
 ## Available Scripts
 
 In the project directory, you can run:
