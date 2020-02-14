@@ -23,7 +23,7 @@ POST: registers a user with fields name and password
 }
 ```
 
-### `/user/:name`
+### `/users/:name`
 
 GET: returns information given a user's name
 

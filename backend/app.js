@@ -4,15 +4,16 @@ var bodyParser = require("body-parser");
 
 
 var app = express();
+var config = require('./config.js');
 
 const { Pool } = require('pg')
 const pool = new Pool({
-  user: 'xqdnhsvcdmopvx',
-  host: 'ec2-54-83-55-122.compute-1.amazonaws.com',
-  database: 'd1upulvgjib8qo',
-  password: '864e5bcd2441c503f96b5b7fc1fb218271d5a1accd2e430ebe85126cf8249f02',
-  port: 5432,
-  ssl: true
+  user: config.user,
+  host: config.host,
+  database: config.database,
+  password: config.password,
+  port: config.port,
+  ssl: config.ssl
 })
 
 app.use(cors());
