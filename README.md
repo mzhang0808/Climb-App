@@ -4,7 +4,7 @@
 
 ### One-sentence description of the project
 
-Climb! is a web application that advances the climbing competition experience by automating the scoring and verification process involved.
+Climb! is a web application that improves the climbing competition experience by automating the scoring and verification process involved.
 
 ### Additional information about the project
 
