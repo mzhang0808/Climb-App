@@ -1,3 +1,4 @@
+Everyone except Tim was present.
 ### Things we done
   - Held a retro to discuss what our following course of actions should be.
   - Discussed the reviewer's feedback and our opinions on the matter
