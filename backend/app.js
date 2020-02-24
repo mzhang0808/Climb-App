@@ -43,12 +43,25 @@ app.get('/users/:name', function(req, res) {
 app.post('/users', function(req, res) {
   var user = req.body.user_name;
   var pass = req.body.password;
-  pool.query("INSERT INTO users (user_name, password) VALUES ('"+user+"', '"+pass+"');", (err, response) => {
-    if (err){
-      res.send(err);
-    }
-    res.send(response);
-  });
+  if (user == null || pass == null) {
+    res.status(400).json('empty fields');
+  } else {
+    pool.query("SELECT COUNT(*) FROM users WHERE user_name = '" + user + "';", (err, response) => {
+      if (err){
+        res.send(err);
+      }
+      if (response.rows[0].count == 0) {
+        pool.query("INSERT INTO users (user_name, password) VALUES ('"+user+"', '"+pass+"');", (err, response) => {
+        if (err){
+          res.send(err);
+        }
+        res.send(response);
+        });
+      } else {
+        res.status(400).json('existing user')
+      }
+    });
+  }
 });
 
 // Competitions endpoint
@@ -62,12 +75,25 @@ app.get('/competitions', function(req, res) {
 app.post('/competitions', function(req, res) {
   var comp = req.body.comp_name;
   var numProb = req.body.num_of_problems;
-  pool.query("INSERT INTO competitions (comp_name, num_of_problems) VALUES ('"+comp+"', '"+numProb+"');", (err, response) => {
-    if (err){
-      res.send(err);
-    }
-    res.send(response);
-  });
+  if (comp == null) {
+    res.status(400).json('empty fields');
+  } else {
+      pool.query("SELECT COUNT(*) FROM competitions WHERE comp_name = '" + comp + "';", (err, response) => {
+      if (err){
+        res.send(err);
+      }
+      if (response.rows[0].count == 0) {
+        pool.query("INSERT INTO competitions (comp_name, num_of_problems) VALUES ('"+comp+"', '"+numProb+"');", (err, response) => {
+        if (err){
+          res.send(err);
+        }
+        res.send(response);
+        });
+      } else {
+        res.status(400).json('existing comp')
+      }
+    });
+  }
 });
 
 // Scores endpoint
