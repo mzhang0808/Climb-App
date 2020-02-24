@@ -107,17 +107,47 @@ app.get('/scores', function(req, res) {
 app.post('/scores', function(req, res) {
   var user = req.body.user_name;
   var comp = req.body.comp;
-  pool.query("UPDATE users SET current_comp = '"+ comp +"' where user_name = '"+ user +"';");
-  pool.query("INSERT INTO scores (user_name, comp, problems) VALUES ('"+user+"', '"+comp+"', ARRAY[]::completed[]);", (err, response) => {
-    if (err){
-      res.send(err);
-    }
-    res.send(response);
-  });
+
+  if (user == null || comp == null) {
+    res.status(400).json('empty fields');
+  } else {
+      pool.query("SELECT COUNT(*) FROM users WHERE user_name = '" + user + "';", (err, response) => {
+      if (err){
+        res.send(err);
+      }
+      if (response.rows[0].count != 0) {
+        pool.query("SELECT COUNT(*) FROM competitions WHERE comp_name = '" + comp + "';", (err, response) => {
+        if (err){
+          res.send(err);
+        }
+        if (response.rows[0].count != 0){
+          pool.query("UPDATE users SET current_comp = '"+ comp +"' where user_name = '"+ user +"';");
+          pool.query("INSERT INTO scores (user_name, comp, problems) VALUES ('"+user+"', '"+comp+"', ARRAY[]::completed[]);", (err, response) => {
+            if (err){
+              res.send(err);
+            }
+            res.send(response);
+          });
+        }else{
+          res.status(400).json('Competition does not exist');
+        }
+        
+        });
+      }else {
+        res.status(400).json('User does not exist');
+      }
+    });
+  }  
 });
 
 app.get('/scores/:name/:comp', function(req, res) {
-    pool.query("SELECT problems FROM scores where user_name='"+req.params.name+"' and comp='"+req.params.comp+"';", (err, response) => {
+
+  pool.query("SELECT COUNT(*) FROM scores WHERE user_name='"+req.params.name+"' and comp='"+req.params.comp+"';", (err, response) => {
+  if (err){
+    res.send(err);
+  }
+  if (response.rows[0].count != 0) {
+    pool.query("SELECT problems FROM scores WHERE user_name='"+req.params.name+"' and comp='"+req.params.comp+"';", (err, response) => {
       if (err) throw err;
       var problems = JSON.parse(response.rows[0].problems.split("\"(").join("[").split(")\"").join("]").split("{").join("[").split("}").join("]"));
       var sorted = problems.sort(function(a, b){
@@ -125,19 +155,38 @@ app.get('/scores/:name/:comp', function(req, res) {
       })
       res.send(problems);
     });
+  }
+  else{
+    res.status(400).json('score entry does not exist');
+  }
+  });
 });
 
 app.patch('/scores/:name/:comp', function(req, res) {
   var problem = req.body.problem;
   var attempts = req.body.attempts;
+  if (problem == null || attempts == null) {
+    res.status(400).json('empty fields');
+  }else{
+    pool.query("SELECT num_of_problems FROM competitions where comp_name = '" + req.params.comp + "';", (err, response) => {
+      if (err){
+        res.send(err);
+      }
+      var num_of_problems = response.rows[0].num_of_problems;
+      if ((problem <= num_of_problems)&&(problem > 0)){
+         pool.query("UPDATE scores SET problems[CARDINALITY(problems)+1] = ROW("+ problem +","+ attempts +") where user_name= '"+ req.params.name + "' and comp= '"+ req.params.comp +"';", (err, response) => {
 
-  pool.query("UPDATE scores SET problems[CARDINALITY(problems)+1] = ROW("+ problem +","+ attempts +") where user_name= '"+ req.params.name + "' and comp= '"+ req.params.comp +"';", (err, response) => {
-
-    if (err){
-      res.send(err);
+        if (err){
+          res.send(err);
+        }
+        res.send(response);
+      });
+      }
+      else{
+        res.status(400).json('invalid problem');
+      }
+    });
     }
-    res.send(response);
-  });
 });
 
 
