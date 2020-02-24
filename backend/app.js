@@ -163,30 +163,40 @@ app.get('/scores/:name/:comp', function(req, res) {
 });
 
 app.patch('/scores/:name/:comp', function(req, res) {
-  var problem = req.body.problem;
-  var attempts = req.body.attempts;
-  if (problem == null || attempts == null) {
-    res.status(400).json('empty fields');
-  }else{
-    pool.query("SELECT num_of_problems FROM competitions where comp_name = '" + req.params.comp + "';", (err, response) => {
-      if (err){
-        res.send(err);
-      }
-      var num_of_problems = response.rows[0].num_of_problems;
-      if ((problem <= num_of_problems)&&(problem > 0)){
-         pool.query("UPDATE scores SET problems[CARDINALITY(problems)+1] = ROW("+ problem +","+ attempts +") where user_name= '"+ req.params.name + "' and comp= '"+ req.params.comp +"';", (err, response) => {
-
+  pool.query("SELECT COUNT(*) FROM scores WHERE user_name='"+req.params.name+"' and comp='"+req.params.comp+"';", (err, response) => {
+  if (err){
+    res.send(err);
+  }
+  if (response.rows[0].count != 0) {
+    var problem = req.body.problem;
+    var attempts = req.body.attempts;
+    if (problem == null || attempts == null) {
+      res.status(400).json('empty fields');
+    }else{
+      pool.query("SELECT num_of_problems FROM competitions where comp_name = '" + req.params.comp + "';", (err, response) => {
         if (err){
           res.send(err);
         }
-        res.send(response);
+        var num_of_problems = response.rows[0].num_of_problems;
+        if ((problem <= num_of_problems)&&(problem > 0)){
+           pool.query("UPDATE scores SET problems[CARDINALITY(problems)+1] = ROW("+ problem +","+ attempts +") where user_name= '"+ req.params.name + "' and comp= '"+ req.params.comp +"';", (err, response) => {
+
+          if (err){
+            res.send(err);
+          }
+          res.send(response);
+        });
+        }
+        else{
+          res.status(400).json('invalid problem');
+        }
       });
       }
-      else{
-        res.status(400).json('invalid problem');
-      }
-    });
     }
+    else{
+      res.status(400).json('score entry does not exist')
+    }
+  });
 });
 
 
