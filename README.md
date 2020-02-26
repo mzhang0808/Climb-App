@@ -8,15 +8,19 @@ Climb! is a web application that improves the climbing competition experience by
 
 ### Additional information about the project
 
-**Target Audience**: Event coordinators and competitors in climbing competitions
+**Target Audience**: Athletes in climbing competitions
 
 **Main Functionality**
 
+For the minimum viable product:
+- Competitors can create a competition
+- Competitors can register for a competition
 - Competitors can upload scores
 - Competitors can view automatically calculated results
+
+For the final sprint:
 - Competitors can have climbing scores verified digitally
 - Competitors can view past competitions and scores
-- Competitors can register for competitions
 
 ## Installation
 
@@ -96,7 +100,7 @@ Here are our <a href="cs48-climb-frontend.herokuapp.com">frontend</a> and <a hre
 - Navigate to the homepage.
 - Click on "Get Started" or "Sign Up" and create an account. If you already have an account, click on "Log In" and log in.
 - Click on "Create Competition" and create a competition. If a competition already exists, click on "Join Competition" and join the competition.
-- Click on "Log Scores" and log scores for a given competition and route.
+- Click on "Log Scores" and log scores for a given competition and route. You can view your scores for the given competition and for all competition.
 - Click on "View Scores" and view the top 3 scores for a given competition.
 
 ## Known Problems
@@ -112,3 +116,7 @@ Here are our <a href="cs48-climb-frontend.herokuapp.com">frontend</a> and <a hre
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
+
+## License
+
+See LICENSE.txt
