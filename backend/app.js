@@ -28,14 +28,18 @@ app.get('/hello', function(req, res) {
 // Users endpoint
 app.get('/users', function(req, res) {
   pool.query("SELECT * FROM users;", (err, response) => {
-    if (err) throw err;
+    if (err) {
+      res.send(err);
+    }
     res.send(response.rows);
   });
 });
 
 app.get('/users/:name', function(req, res) {
   pool.query("SELECT * FROM users where user_name='"+req.params.name+"';", (err, response) => {
-    if (err) throw err;
+    if (err) {
+      res.send(err);
+    }
     res.send(response.rows);
   });
 });
@@ -63,11 +67,36 @@ app.post('/users', function(req, res) {
     });
   }
 });
+app.delete('/users', function(req, res) {
+  var user = req.body.user_name;
+  var pass = req.body.password;
+  if (user == null || pass == null) {
+    res.status(400).json('empty fields');
+  } else {
+    pool.query("SELECT COUNT(*) FROM users WHERE user_name = '" + user + "';", (err, response) => {
+      if (err){
+        res.send(err);
+      }
+      if (response.rows[0].count != 0) {
+        pool.query("DELETE FROM users where user_name = '"+user+"' and password = '"+pass+"';", (err, response) => {
+        if (err){
+          res.send(err);
+        }
+        res.send(response);
+        });
+      } else {
+        res.status(400).json('no such user')
+      }
+    });
+  }
+});
 
 // Competitions endpoint
 app.get('/competitions', function(req, res) {
   pool.query("SELECT * FROM competitions;", (err, response) => {
-    if (err) throw err;
+    if (err) {
+      res.send(err);
+    }
     res.send(response.rows);
   });
 });
@@ -99,7 +128,9 @@ app.post('/competitions', function(req, res) {
 // Scores endpoint
 app.get('/scores', function(req, res) {
   pool.query("SELECT * FROM scores;", (err, response) => {
-    if (err) throw err;
+    if (err) {
+      res.send(err);
+    }
     res.send(response.rows);
   });
 });
@@ -118,7 +149,9 @@ app.post('/scores', function(req, res) {
 
 app.get('/scores/:name/:comp', function(req, res) {
     pool.query("SELECT problems FROM scores where user_name='"+req.params.name+"' and comp='"+req.params.comp+"';", (err, response) => {
-      if (err) throw err;
+      if (err) {
+        res.send(err);
+      }
       var problems = JSON.parse(response.rows[0].problems.split("\"(").join("[").split(")\"").join("]").split("{").join("[").split("}").join("]"));
       var sorted = problems.sort(function(a, b){
         return b[0] - a[0];
@@ -147,3 +180,5 @@ var PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Our app is running on port ${ PORT }`);
 });
+
+module.exports = app;
