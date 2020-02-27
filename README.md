@@ -92,6 +92,23 @@ Once you have set up the backend with Heroku, you can add database functionality
 
 4. Once this is complete, you must copy over the config.example.js file into a new file named config.js and alter the fields to match the database configurations (username, host, password, etc) on Heroku. These can be found by clicking on the Heroku Postgres option under Add-ons, then selecting Database Credentials under the Settings tab. Without this step, the Node.js server will not know what database to query.
 
+### Testing
+
+**Frontend**
+
+**Backend: Mocha.js**
+1. Install Mocha.js dependancies.
+<pre>npm install mocha</pre>
+<pre>npm install chai</pre>
+<pre>npm install chai-http</pre>
+
+2. Navigate to <code>backend</code> directory.
+<pre>cd backend</pre>
+
+3. Run tests.
+  a. Unit tests.
+  <pre>mocha test/unit</pre>
+
 
 ## Functionality
 
