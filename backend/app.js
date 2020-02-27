@@ -104,7 +104,7 @@ app.get('/competitions', function(req, res) {
 app.post('/competitions', function(req, res) {
   var comp = req.body.comp_name;
   var numProb = req.body.num_of_problems;
-  if (comp == null) {
+  if (comp == null | numProb == null) {
     res.status(400).json('empty fields');
   } else {
       pool.query("SELECT COUNT(*) FROM competitions WHERE comp_name = '" + comp + "';", (err, response) => {
@@ -120,6 +120,28 @@ app.post('/competitions', function(req, res) {
         });
       } else {
         res.status(400).json('existing comp')
+      }
+    });
+  }
+});
+app.delete('/competitions', function(req, res) {
+  var comp = req.body.comp_name;
+  if (comp == null) {
+    res.status(400).json('empty fields');
+  } else {
+    pool.query("SELECT COUNT(*) FROM competitions WHERE comp_name = '" + comp + "';", (err, response) => {
+      if (err){
+        res.send(err);
+      }
+      if (response.rows[0].count != 0) {
+        pool.query("DELETE FROM competitions where comp_name = '"+comp+"';", (err, response) => {
+        if (err){
+          res.send(err);
+        }
+        res.send(response);
+        });
+      } else {
+        res.status(400).json('no such competition')
       }
     });
   }
