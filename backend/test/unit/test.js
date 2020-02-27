@@ -75,7 +75,7 @@ describe('Users', () => {
 		});
 	});
 	describe('/POST duplicate user', () => {
-		it('this should POST a duplicate user', (done) => {
+		it('this attempts to POST a duplicate user and returns an error', (done) => {
 			let user = {
 				user_name: "michael",
 				password: "<3ndicy"
@@ -87,6 +87,50 @@ describe('Users', () => {
 				res.should.have.status(400);
 				res.body.should.be.a('string');
 				res.body.should.eql('existing user');
+			    done();
+			});
+		});
+	});
+	describe('/GET specific users', () => {
+		it('this should GET a specific user', (done) => {
+			chai.request(server)
+			    .get('/users/michael')
+			    .end((err,res) => {
+				res.should.have.status(200);
+				res.body.should.be.a('array');
+				res.body.length.should.eql(1);
+			    done();
+			});
+		});
+	});
+	describe('/DELETE specific user', () => {
+		it('this should DELETE a specific user', (done) => {
+			let user = {
+				user_name: "michael",
+				password: "<3ndicy"
+			}
+			chai.request(server)
+			    .delete('/users')
+			    .send(user)
+			    .end((err,res) => {
+				res.should.have.status(200);
+			    done();
+			});
+		});
+	});
+	describe('/DELETE non-existing user', () => {
+		it('this attempts to DELETE a non-existing user', (done) => {
+			let user = {
+				user_name: "michael",
+				password: "<3ndicy"
+			}
+			chai.request(server)
+			    .delete('/users')
+			    .send(user)
+			    .end((err,res) => {
+				res.should.have.status(400);
+				res.body.should.be.a('string');
+				res.body.should.eql('no such user');
 			    done();
 			});
 		});

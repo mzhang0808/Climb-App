@@ -67,6 +67,29 @@ app.post('/users', function(req, res) {
     });
   }
 });
+app.delete('/users', function(req, res) {
+  var user = req.body.user_name;
+  var pass = req.body.password;
+  if (user == null || pass == null) {
+    res.status(400).json('empty fields');
+  } else {
+    pool.query("SELECT COUNT(*) FROM users WHERE user_name = '" + user + "';", (err, response) => {
+      if (err){
+        res.send(err);
+      }
+      if (response.rows[0].count != 0) {
+        pool.query("DELETE FROM users where user_name = '"+user+"' and password = '"+pass+"';", (err, response) => {
+        if (err){
+          res.send(err);
+        }
+        res.send(response);
+        });
+      } else {
+        res.status(400).json('no such user')
+      }
+    });
+  }
+});
 
 // Competitions endpoint
 app.get('/competitions', function(req, res) {
