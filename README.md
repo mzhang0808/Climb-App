@@ -105,7 +105,7 @@ Once you have set up the backend with Heroku, you can add database functionality
 2. Navigate to <code>backend</code> directory.
 <pre>cd backend</pre>
 
-3. Run tests.
+3. Run tests.  
   a. Unit tests.
   <pre>mocha test/unit</pre>
 
