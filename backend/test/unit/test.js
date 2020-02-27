@@ -4,6 +4,7 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 let server = require('../../app');
 let should = chai.should();
+let expect = chai.expect();
 
 
 chai.use(chaiHttp);
@@ -24,5 +25,21 @@ describe('Users', () => {
 			});
 		});
 	});
-
+	describe('/POST user', () => {
+		it('this should not POST a user if the user_name field is empty', (done) => {
+			let user = {
+				user_name: null,
+				password: "hello"
+			}
+			chai.request(server)
+			    .post('/users')
+			    .send(user)
+			    .end((err,res) => {
+				res.should.have.status(400);
+				res.body.should.be.a('string');
+				res.body.should.eql('empty fields');
+			    done();
+			});
+		});
+	});
 });
