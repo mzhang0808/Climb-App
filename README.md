@@ -112,7 +112,7 @@ Once you have set up the backend with Heroku, you can add database functionality
 
 ## Functionality
 
-Here are our <a href="cs48-climb-frontend.herokuapp.com">frontend</a> and <a href="cs48-climb-backend.herokuapp.com">backend</a> in production.
+Here are our <a href="https://cs48-climb-frontend.herokuapp.com">frontend</a> and <a href="https://cs48-climb-backend.herokuapp.com">backend</a> in production.
 
 - Navigate to the homepage.
 - Click on "Get Started" or "Sign Up" and create an account. If you already have an account, click on "Log In" and log in.
