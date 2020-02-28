@@ -22,7 +22,9 @@ jobs:
     - run: npm install
     - run: npm run build --if-present
     - run: npm test
-    - run: npm install mocha chai chai-http
+    - run: npm install mocha 
+    - run: npm install chai 
+    - run: npm install chai-http
     - run: mocha test/unit
       env:
         CI: true
