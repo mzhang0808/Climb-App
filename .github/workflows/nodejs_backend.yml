@@ -24,6 +24,6 @@ jobs:
     - run: npm install -g mocha 
     - run: npm install chai 
     - run: npm install chai-http
-    - run: npm test test/unit
+    - run: npm test
       env:
         CI: true
