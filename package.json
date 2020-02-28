@@ -3,5 +3,6 @@
   "version": "1.0.0",
   "scripts": {
     "start": "cd backend && npm start"
+    "test": "mocha --ui tdd test/unit"
   }
 }
