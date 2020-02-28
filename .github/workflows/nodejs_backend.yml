@@ -24,7 +24,6 @@ jobs:
     - run: npm install -g mocha 
     - run: npm install chai 
     - run: npm install chai-http
-    - run: cd backend/test
-    - run: npx mocha '*.js'
+    - run: npx mocha 'backend/test/*.js'
       env:
         CI: true
