@@ -21,8 +21,9 @@ jobs:
     - run: cd backend
     - run: npm install
     - run: npm run build --if-present
-    - run: npm install cors
     - run: npm install express
+    - run: npm install cors
+    - run: npm install pg
     - run: npm install -g mocha 
     - run: npm install chai 
     - run: npm install chai-http
