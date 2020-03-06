@@ -9,6 +9,7 @@ Things done since last meeting:
 
 Things to do:
 - Session state
+- Feedback for users
 - Add foreign key constraint
 - Add on delete cascade
 - Additional endpoints
