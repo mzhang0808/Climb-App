@@ -67,6 +67,31 @@ app.post('/users', function(req, res) {
     });
   }
 });
+app.patch('/users/:name', function(req, res) {
+  var password = req.body.password;
+  if (password == null){
+    res.status(400).json('empty fields');
+  }
+  else{
+    pool.query("SELECT COUNT(*) FROM users WHERE user_name = '"+ req.params.name + "';", (err,response) => {
+      if (err) {
+        res.send(err);
+      }
+      if (response.rows[0].count != 0){
+        pool.query("UPDATE users SET password = '"+ password +"' where user_name = '"+ req.params.name +"';", (err,response) =>{
+          if(err){
+            res.send(err);
+          }
+          res.send(response);
+        });
+      }else{
+        res.status(400).json('no such user')
+      }
+    });
+      
+  }
+});
+
 app.delete('/users', function(req, res) {
   var user = req.body.user_name;
   var pass = req.body.password;
