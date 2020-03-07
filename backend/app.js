@@ -206,18 +206,33 @@ app.post('/scores', function(req, res) {
           if (err){
             res.send(err);
           }
+          
+
+
           if (response.rows[0].count != 0) {
-            pool.query("UPDATE users SET current_comp = '"+ comp +"' where user_name = '"+ user +"';");
-            pool.query("INSERT INTO scores (user_name, comp, problems) VALUES ('"+user+"', '"+comp+"', ARRAY[]::completed[]);", (err, response) => {
+            pool.query("SELECT COUNT(*) FROM scores WHERE user_name = '" + user + "' and comp = '"+ comp +"';", (err, response) => {
               if (err){
                 res.send(err);
               }
-              res.send(response);
+              if(response.rows[0].count == 0){
+                pool.query("UPDATE users SET current_comp = '"+ comp +"' where user_name = '"+ user +"';");
+                pool.query("INSERT INTO scores (user_name, comp, problems) VALUES ('"+user+"', '"+comp+"', ARRAY[]::completed[]);", (err, response) => {
+                  if (err){
+                    res.send(err);
+                  }
+                  res.send(response);
+                });
+              }else{
+                res.status(400).json('existing score entry')
+              }
             });
           }
           else{
             res.status(400).json('no such user')
           }
+
+
+        
       });
     }
     else{
