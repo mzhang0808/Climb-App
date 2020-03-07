@@ -82,7 +82,11 @@ app.delete('/users', function(req, res) {
         if (err){
           res.send(err);
         }
-        res.send(response);
+        pool.query("DELETE FROM scores where user_name = '"+user+"';", (err, response) => {
+        if (err){
+          res.send(err);
+        }
+        res.send(response);});
         });
       } else {
         res.status(400).json('no such user')
@@ -138,7 +142,11 @@ app.delete('/competitions', function(req, res) {
         if (err){
           res.send(err);
         }
-        res.send(response);
+        pool.query("DELETE FROM scores where comp = '"+comp+"';", (err, response) => {
+          if (err){
+            res.send(err);
+        }
+        res.send(response)});
         });
       } else {
         res.status(400).json('no such competition')
