@@ -203,7 +203,32 @@ app.patch('/scores/:name/:comp', function(req, res) {
   });
 });
 
+app.delete('/scores', function(req, res) {
+  var user = req.body.user_name;
+  var comp = req.body.comp;
 
+  if (user == null | comp == null) {
+    res.status(400).json('empty fields')
+  }else{
+    pool.query("SELECT COUNT(*) FROM scores WHERE user_name = '" + user + "' and comp = '"+ comp +"';", (err, response) => {
+      if (err){
+        res.send(err);
+      }
+      if (response.rows[0].count != 0) {
+        pool.query("DELETE FROM scores where user_name = '"+user+"' and comp = '"+ comp +"';", (err, response) => {
+        if (err){
+          res.send(err);
+        }
+        res.send(response);
+        });
+      } else {
+        res.status(400).json('no such score entry')
+      }
+    });
+  }
+
+    
+});
 
 
 var PORT = process.env.PORT || 3000;
