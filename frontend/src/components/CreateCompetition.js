@@ -33,6 +33,10 @@ export default class CreateCompetition extends Component {
       comp_name: this.state.comp_name,
       num_of_problems: this.state.num_of_problems
     }).then(response => this.setState({data: response.status}));
+
+    if(this.state.data === 200) {
+      alert('Successfully created ' + this.state.comp_name + '!');
+    }
   }
 
   render() {

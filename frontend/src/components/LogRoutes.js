@@ -19,7 +19,6 @@ export default class LogScores extends Component {
     }
 
     this.scores = [];
-    this.allScores = [];
     this.table = [];
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -36,41 +35,27 @@ export default class LogScores extends Component {
   // Upon submission, call API
   onSubmitHandler(event) {
     event.preventDefault();
-    let url = "https://cs48-climb-backend.herokuapp.com/scores/" + this.state.username + "/" + this.state.competition;
+    let url = "https://cs48-climb-backend.herokuapp.com/scores/" + localStorage.getItem('username') + "/" + localStorage.getItem('comp');
     axios.patch(url, {
       problem: this.state.problem,
       attempts: this.state.attempts
     })
 
-    axios.get("https://cs48-climb-backend.herokuapp.com/scores/"
-    ).then(response => this.setState({data: response.data}));
+    axios.get(url).then(response => this.setState({data: response.data}));
   }
 
   render() {
+    this.scores = [];
 
-    for(let i = 0; i < this.state.data.length; i++) {
+    for(let i = this.state.data.length - 1; i >= 0; i--) {
       let score = this.state.data[i];
-      let user_name = score.user_name.replace(' ', '').trim();
-      let comp = score.comp.replace(' ', '').trim();
-      if(user_name === this.state.username) {
-        this.allScores.push(score);
-        if(comp === this.state.competition) {
-          this.scores.push(score);
-        }
-      }
+      this.scores.push(score);
     }
     
     this.table = this.scores.map((item, key) => 
       <tr>
-        <td>{item.comp}</td>
-        <td>{item.problems}</td>
-      </tr>
-    );
-
-    this.allTable = this.allScores.map((item, key) =>
-      <tr>
-        <td>{item.comp}</td>
-        <td>{item.problems}</td>
+        <td>{item[0]}</td>
+        <td>{item[1]}</td>
       </tr>
     );
 
@@ -81,26 +66,6 @@ export default class LogScores extends Component {
           <div class="row">
             <div class="col-lg-12">
               <form onSubmit={this.onSubmitHandler}>
-                <div class="form-group">
-                  <label>Username</label>
-                  <input 
-                    type="text" 
-                    class="form-control" 
-                    name="username" 
-                    placeholder="Username" 
-                    onChange={this.onChangeHandler} 
-                    required/>
-                </div>
-                <div class="form-group">
-                  <label>Competition Name</label>
-                  <input 
-                    type="text" 
-                    class="form-control" 
-                    name="competition" 
-                    placeholder="Name" 
-                    onChange={this.onChangeHandler} 
-                    required/>
-                </div>
                 <div class="form-group">
                   <label>Route #</label>
                   <input 
@@ -119,31 +84,19 @@ export default class LogScores extends Component {
                     onChange={this.onChangeHandler} 
                     required/>
                 </div>
-                <button type="submit" class="btn btn-default btn-lg">Log Scores <i class="fa fa-hand-rock"></i></button>
+                <button type="submit" class="btn btn-default btn-lg">Log Routes <i class="fa fa-hand-rock"></i></button>
               </form>
               <hr/>
-              <h3>Scores for this Competition</h3>
+              <h3>Routes for this Competition</h3>
               <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Competition</th>
-                    <th scope="col">Scores</th>
+                    <th scope="col">Route #</th>
+                    <th scope="col">Attempts</th>
                   </tr>
                 </thead>
                 <tbody>
                   {this.table}
-                </tbody>
-              </table>
-              <h3>Scores for all Competitions</h3>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Competition</th>
-                    <th scope="col">Scores</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.allTable}
                 </tbody>
               </table>
             </div>

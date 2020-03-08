@@ -10,8 +10,8 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import CreateCompetition from './components/CreateCompetition';
 import JoinCompetition from './components/JoinCompetition';
-import LogScores from './components/LogScores';
-import ViewScores from './components/ViewScores';
+import LogRoutes from './components/LogRoutes';
+import ViewScore from './components/ViewScore';
 
 export default class App extends Component {
   render() {
@@ -23,8 +23,8 @@ export default class App extends Component {
         <Route path="/signup" component={Signup}></Route>
         <Route path="/competitions/create" component={CreateCompetition}></Route>
         <Route path="/competitions/join" component={JoinCompetition}></Route>
-        <Route path="/scores/log" component={LogScores}></Route>
-        <Route path="/scores/view" component={ViewScores}></Route>
+        <Route path="/scores/log" component={LogRoutes}></Route>
+        <Route path="/scores/view" component={ViewScore}></Route>
       </Switch>
     </Router>
   }

@@ -13,6 +13,7 @@ export default class Signup extends Component {
     this.state = {
       username: null,
       password: null,
+      data: null
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -31,7 +32,11 @@ export default class Signup extends Component {
     axios.post("https://cs48-climb-backend.herokuapp.com/users", {
       user_name: this.state.username, 
       password: this.state.password
-    }).then(response => console.log(response));
+    }).then(response => this.setState({data: response.status}));
+
+    if(this.state.data === 200) {
+      alert('Success!')
+    }
   }
 
   render() {
@@ -58,7 +63,7 @@ export default class Signup extends Component {
                     type="password" 
                     class="form-control" 
                     name="password" 
-                    placeholder="Name" 
+                    placeholder="Password" 
                     onChange={this.onChangeHandler} 
                     required/>
                 </div>
