@@ -36,7 +36,7 @@ export default class JoinCompetition extends Component {
 
     if(this.state.data === 200) {
       localStorage.setItem('comp', this.state.comp);
-      alert('Successfully joined ' + this.state.comp_name + '!');
+      alert('Successfully joined ' + this.state.comp + '!');
     }
   }
 

@@ -1,11 +1,11 @@
-// LogScores.js
+// LogRoutes.js
 // outputs tablulated score data
 
 import React, {Component} from 'react';
 import axios from 'axios';
 import NavBar from './NavBar';
 
-export default class LogScores extends Component {
+export default class LogRoutes extends Component {
 
   // Set State
   constructor(props) {

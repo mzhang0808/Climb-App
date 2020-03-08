@@ -1,11 +1,11 @@
-// ViewScores.js
+// ViewScore.js
 // outputs tablulated score data
 
 import React, {Component} from 'react';
 import axios from 'axios';
 import NavBar from './NavBar';
 
-export default class ViewScores extends Component {
+export default class ViewScore extends Component {
 
   // Set state
   constructor(props) {
