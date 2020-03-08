@@ -30,9 +30,14 @@ export default class JoinCompetition extends Component {
   onSubmitHandler(event) {
     event.preventDefault();
     axios.post("https://cs48-climb-backend.herokuapp.com/scores", {
-      user_name: this.state.user_name,
+      user_name: localStorage.getItem('username'),
       comp: this.state.comp
     }).then(response => this.setState({data: response.status}));
+
+    if(this.state.data === 200) {
+      localStorage.setItem('comp', this.state.comp);
+      alert('Successfully joined ' + this.state.comp_name + '!');
+    }
   }
 
   render() {
@@ -43,16 +48,6 @@ export default class JoinCompetition extends Component {
           <div class="row">
             <div class="col-lg-12">
               <form onSubmit={this.onSubmitHandler}>
-                <div class="form-group">
-                  <label>Username</label>
-                  <input 
-                    type="text" 
-                    class="form-control" 
-                    name="user_name" 
-                    placeholder="Username"
-                    onChange={this.onChangeHandler} 
-                    required/>
-                </div>
                 <div class="form-group">
                   <label>Competition Name</label>
                   <input 

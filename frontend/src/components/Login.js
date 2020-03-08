@@ -31,6 +31,11 @@ export default class Login extends Component {
     event.preventDefault();
     let url = "https://cs48-climb-backend.herokuapp.com/users/" + this.state.username;
     axios.get(url).then(response => this.setState({data: response.status}));
+
+    if(this.state.data === 200) {
+      localStorage.setItem('username', this.state.username);
+      alert('Welcome, ' + localStorage.getItem('username') + '!');
+    }
   }
 
   render() {
@@ -57,11 +62,11 @@ export default class Login extends Component {
                     type="password" 
                     class="form-control" 
                     name="password" 
-                    placeholder="Name" 
+                    placeholder="Password" 
                     onChange={this.onChangeHandler} 
                     required/>
                 </div>
-                <button type="submit" class="btn btn-default btn-lg">Login <i class="fa fa-hand-rock"></i></button>
+                <button type="submit" class="btn btn-default btn-lg">Log In <i class="fa fa-hand-rock"></i></button>
               </form>
             </div>
           </div>
