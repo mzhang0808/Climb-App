@@ -122,9 +122,7 @@ Here are our <a href="https://cs48-climb-frontend.herokuapp.com">frontend</a> an
 
 ## Known Problems
 
-- On the frontend's /log/scores webpage, the JSON response is not formatted properly, so all scores are only shown as a string in the table.
-- On the frontend, there have been glitches in remembering whether the user is logged in or not.
-- On the backend, two of the tables are not yet related by foreign key.
+- Some of the submit buttons need to be clicked twice before the user receives any feedback
 
 ## Contributing
 

@@ -35,7 +35,7 @@ export default class LogScores extends Component {
   // Upon submission, call API
   onSubmitHandler(event) {
     event.preventDefault();
-    let url = "https://cs48-climb-backend.herokuapp.com/scores/" + localStorage.getItem('username') + "/" + localStorage.getItem('comp');
+    let url = "https://cs48-climb-backend.herokuapp.com/scores/log/" + localStorage.getItem('username') + "/" + localStorage.getItem('comp');
     axios.patch(url, {
       problem: this.state.problem,
       attempts: this.state.attempts
