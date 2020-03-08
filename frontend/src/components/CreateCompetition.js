@@ -32,11 +32,13 @@ export default class CreateCompetition extends Component {
     axios.post("https://cs48-climb-backend.herokuapp.com/competitions", {
       comp_name: this.state.comp_name,
       num_of_problems: this.state.num_of_problems
-    }).then(response => this.setState({data: response.status}));
+    }).then(response => {
+      this.setState({status: response.status});
+      if(this.state.status === 200) {
+        alert('Successfully created ' + this.state.comp_name + '!');
+      }
+    });
 
-    if(this.state.data === 200) {
-      alert('Successfully created ' + this.state.comp_name + '!');
-    }
   }
 
   render() {
