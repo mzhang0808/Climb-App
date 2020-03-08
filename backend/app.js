@@ -1,3 +1,4 @@
+var uuidv1 = require('uuid/v1');
 var cors = require('cors');
 var express = require('express');
 var bodyParser = require("body-parser");
@@ -205,9 +206,6 @@ app.post('/scores', function(req, res) {
           if (err){
             res.send(err);
           }
-          
-
-
           if (response.rows[0].count != 0) {
             pool.query("SELECT COUNT(*) FROM scores WHERE user_name = '" + user + "' and comp = '"+ comp +"';", (err, response) => {
               if (err){
@@ -228,10 +226,7 @@ app.post('/scores', function(req, res) {
           }
           else{
             res.status(400).json('no such user')
-          }
-
-
-        
+          }       
       });
     }
     else{
@@ -257,6 +252,8 @@ app.get('/scores/:name/:comp', function(req, res) {
 app.patch('/scores/log/:name/:comp', function(req, res) {
   var problem = req.body.problem;
   var attempts = req.body.attempts;
+  var key1 = req.body.key1;
+  var key2 = req.body.key2;
 
   pool.query("SELECT num_of_problems FROM competitions WHERE comp_name='"+ req.params.comp + "';", (err, response) => {
     if (err) {
@@ -277,12 +274,17 @@ app.patch('/scores/log/:name/:comp', function(req, res) {
             not_there = false
         }
         if(not_there){
-          pool.query("UPDATE scores SET problems[CARDINALITY(problems)+1] = ROW("+ problem +","+ attempts +") where user_name= '"+ req.params.name + "' and comp= '"+ req.params.comp +"';", (err, response) => {
-
-          if (err){
-            res.send(err);
-          }
-          res.send(response);
+          pool.query("SELECT COUNT(*) FROM users WHERE user_name = '"+ key1 +"' or user_name = '"+ key2 +"';", (err, response) => {
+            if(response.rows[0].count == 2){
+              pool.query("UPDATE scores SET problems[CARDINALITY(problems)+1] = ROW("+ problem +","+ attempts +") where user_name= '"+ req.params.name + "' and comp= '"+ req.params.comp +"';", (err, response) => {
+                if (err){
+                  res.send(err);
+                }
+                res.send(response);
+                });
+            }else{
+              res.status(400).json('invalid key(s)')
+            }
           });
         }
         else{
