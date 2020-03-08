@@ -11,18 +11,6 @@ chai.use(chaiHttp);
 
 // UNIT TESTS: /users
 describe('Users', () => {
-	describe('/GET users', () => {
-		it('this should GET all users', (done) => {
-			chai.request(server)
-			    .get('/users')
-			    .end((err,res) => {
-				res.should.have.status(200);
-				res.body.should.be.a('array');
-				res.body.length.should.be.above(0);
-			    done();
-			});
-		});
-	});
 	describe('/POST null user_name', () => {
 		it('this should not POST a user if the user_name field is empty', (done) => {
 			let user = {
@@ -68,6 +56,18 @@ describe('Users', () => {
 			    .send(user)
 			    .end((err,res) => {
 				res.should.have.status(200);
+			    done();
+			});
+		});
+	});
+	describe('/GET users', () => {
+		it('this should GET all users', (done) => {
+			chai.request(server)
+			    .get('/users')
+			    .end((err,res) => {
+				res.should.have.status(200);
+				res.body.should.be.a('array');
+				res.body.length.should.be.above(0);
 			    done();
 			});
 		});
@@ -137,18 +137,6 @@ describe('Users', () => {
 
 // UNIT TESTS: /competitions
 describe('Competitions', () => {
-	describe('/GET competitions', () => {
-		it('this should GET all competitions', (done) => {
-			chai.request(server)
-				.get('/competitions')
-				.end((err,res) =>{
-				res.should.have.status(200);
-				res.body.should.be.a('array');
-				res.body.length.should.be.above(0);
-				done();
-				});
-		});
-	});
 	describe('/POST null comp_name', () => {
 		it('this should not POST a comp if the comp_name field is empty', (done) => {
 			let comp = {
@@ -196,6 +184,18 @@ describe('Competitions', () => {
 				res.should.have.status(200);
 			    done();
 			});
+		});
+	});
+	describe('/GET competitions', () => {
+		it('this should GET all competitions', (done) => {
+			chai.request(server)
+				.get('/competitions')
+				.end((err,res) =>{
+				res.should.have.status(200);
+				res.body.should.be.a('array');
+				res.body.length.should.be.above(0);
+				done();
+				});
 		});
 	});
 	describe('/DELETE null comp', () => {
