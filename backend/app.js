@@ -273,7 +273,7 @@ app.patch('/scores/log/:name/:comp', function(req, res) {
             not_there = false
         }
         if(not_there){
-          pool.query("SELECT COUNT(*) FROM users WHERE user_name = '"+ key1 +"' or user_name = '"+ key2 +"';", (err, response) => {
+          pool.query("SELECT COUNT(*) FROM users WHERE user_name = '"+ key1 +"' or user_name = '"+ key2 +"' and current_comp = '"+ req.params.comp +"';", (err, response) => {
             if(response.rows[0].count == 2){
               pool.query("UPDATE scores SET problems[CARDINALITY(problems)+1] = ROW("+ problem +","+ attempts +") where user_name= '"+ req.params.name + "' and comp= '"+ req.params.comp +"';", (err, response) => {
                 if (err){
@@ -282,7 +282,7 @@ app.patch('/scores/log/:name/:comp', function(req, res) {
                 res.send(response);
                 });
             }else{
-              res.status(400).json('invalid key(s)')
+              res.status(400).json('invalid key(s) for this competition')
             }
           });
         }
