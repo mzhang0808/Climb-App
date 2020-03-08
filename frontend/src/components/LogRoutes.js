@@ -15,7 +15,6 @@ export default class LogRoutes extends Component {
       competition: null,
       problem: null,
       attempts: null,
-      data: [],
     }
 
     this.scores = [];
@@ -39,27 +38,32 @@ export default class LogRoutes extends Component {
     axios.patch(url, {
       problem: this.state.problem,
       attempts: this.state.attempts
-    })
+    });
 
-    axios.get(url).then(response => this.setState({data: response.data}));
+    url = "https://cs48-climb-backend.herokuapp.com/scores/" + localStorage.getItem('username') + "/" + localStorage.getItem('comp');
+    axios.get(url);
+
+    url = "https://cs48-climb-backend.herokuapp.com/scores/" + localStorage.getItem('username') + "/" + localStorage.getItem('comp');
+    axios.get(url).then(response => {
+      this.setState({data: response.data});
+
+      this.scores = [];
+
+      for(let i = this.state.data.length - 1; i >= 0; i--) {
+        let score = this.state.data[i];
+        this.scores.push(score);
+      }
+      this.setState({status: response.status});
+    });
   }
 
   render() {
-    this.scores = [];
-
-    for(let i = this.state.data.length - 1; i >= 0; i--) {
-      let score = this.state.data[i];
-      this.scores.push(score);
-      console.log('PUshing');
-    }
-    
     this.table = this.scores.map((item, key) => 
       <tr>
         <td>{item[0]}</td>
         <td>{item[1]}</td>
       </tr>
     );
-
     return (
       <>
         <NavBar></NavBar>

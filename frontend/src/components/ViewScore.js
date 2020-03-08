@@ -18,32 +18,35 @@ export default class ViewScore extends Component {
 
     this.scores = [];
     this.table = [];
+    this.finalScore = 0.0;
 
     let url = "https://cs48-climb-backend.herokuapp.com/scores/" + localStorage.getItem('username') + "/" + localStorage.getItem('comp');
-    axios.get(url).then(response => this.setState({data: response.data}));
-    
-    this.scores = [];
+    axios.get(url);
 
-    for(let i = 0; i < Math.min(this.state.data.length, 3); i++) {
-      let score = this.state.data[i];
-      this.scores.push(score);
-    }
+    url = "https://cs48-climb-backend.herokuapp.com/scores/" + localStorage.getItem('username') + "/" + localStorage.getItem('comp');
+    axios.get(url).then(response => {
+      this.setState({data: response.data});
 
-    this.finalScore = 0.0;
-    for(let i = 0; i < Math.min(this.state.data.length, 3); i++) {
-      let score = this.scores[i];
-      this.finalScore += score[0] - score[1] / 100.0;
-    }
+      this.scores = [];
+      this.finalScore = 0.0;
 
+      for(let i = 0; i < Math.min(this.state.data.length, 3); i++) {
+        let score = this.state.data[i];
+        this.scores.push(score);
+        this.finalScore += score[0] - score[1] / 100.0;
+      }
+      console.log(this.scores);
+      this.setState({status: response.status});
+    });
+  }
+
+  render() {
     this.table = this.scores.map((item, key) => 
       <tr>
         <td>{item[0]}</td>
         <td>{item[1]}</td>
       </tr>
     );
-  }
-
-  render() {
     return (
       <>
         <NavBar></NavBar>

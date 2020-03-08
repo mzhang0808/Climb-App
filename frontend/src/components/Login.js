@@ -13,7 +13,6 @@ export default class Login extends Component {
     this.state = {
       username: null,
       password: null,
-      data: null,
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -30,12 +29,14 @@ export default class Login extends Component {
   onSubmitHandler(event) {
     event.preventDefault();
     let url = "https://cs48-climb-backend.herokuapp.com/users/" + this.state.username;
-    axios.get(url).then(response => this.setState({data: response.status}));
-
-    if(this.state.data === 200) {
-      localStorage.setItem('username', this.state.username);
-      alert('Welcome, ' + localStorage.getItem('username') + '!');
-    }
+    axios.get(url).then(response => {
+      this.setState({status: response.status});
+      if(this.state.status === 200) {
+        localStorage.setItem('username', this.state.username);
+        alert('Welcome, ' + localStorage.getItem('username') + '!');
+      }
+      this.setState({data: response.data});
+    });
   }
 
   render() {
