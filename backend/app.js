@@ -259,6 +259,15 @@ app.patch('/scores/log/:name/:comp', function(req, res) {
   var problem = req.body.problem;
   var attempts = req.body.attempts;
 
+  pool.query("SELECT num_of_problems FROM competitions WHERE comp_name='"+ req.params.comp + "';", (err, response) => {
+    if (err) {
+      res.send(err);
+    }
+    if (problem > response.rows[0].num_of_problems) {
+      res.status(400).json('invalid problem number');
+    }
+  });
+
   pool.query("UPDATE scores SET problems[CARDINALITY(problems)+1] = ROW("+ problem +","+ attempts +") where user_name= '"+ req.params.name + "' and comp= '"+ req.params.comp +"';", (err, response) => {
 
     if (err){
