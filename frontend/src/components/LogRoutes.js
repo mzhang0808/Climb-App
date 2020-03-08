@@ -15,6 +15,8 @@ export default class LogRoutes extends Component {
       competition: null,
       problem: null,
       attempts: null,
+      key1: null,
+      key2: null
     }
 
     this.scores = [];
@@ -37,7 +39,9 @@ export default class LogRoutes extends Component {
     let url = "https://cs48-climb-backend.herokuapp.com/scores/log/" + localStorage.getItem('username') + "/" + localStorage.getItem('comp');
     axios.patch(url, {
       problem: this.state.problem,
-      attempts: this.state.attempts
+      attempts: this.state.attempts,
+      key1: this.state.key1,
+      key2: this.state.key2
     });
 
     url = "https://cs48-climb-backend.herokuapp.com/scores/" + localStorage.getItem('username') + "/" + localStorage.getItem('comp');
@@ -86,6 +90,24 @@ export default class LogRoutes extends Component {
                     type="number" 
                     class="form-control" 
                     name="attempts" 
+                    onChange={this.onChangeHandler} 
+                    required/>
+                </div>
+                <div class="form-group">
+                  <label>Witness #1</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    name="key1" 
+                    onChange={this.onChangeHandler} 
+                    required/>
+                </div>
+                <div class="form-group">
+                  <label>Witness #2</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    name="key2" 
                     onChange={this.onChangeHandler} 
                     required/>
                 </div>
