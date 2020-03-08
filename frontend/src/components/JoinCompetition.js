@@ -32,12 +32,13 @@ export default class JoinCompetition extends Component {
     axios.post("https://cs48-climb-backend.herokuapp.com/scores", {
       user_name: localStorage.getItem('username'),
       comp: this.state.comp
-    }).then(response => this.setState({data: response.status}));
-
-    if(this.state.data === 200) {
-      localStorage.setItem('comp', this.state.comp);
-      alert('Successfully joined ' + this.state.comp + '!');
-    }
+    }).then(response => {
+      this.setState({status: response.status});
+      if(this.state.status === 200) {
+        localStorage.setItem('comp', this.state.comp);
+        alert('Successfully joined ' + this.state.comp + '!');
+      }
+    });
   }
 
   render() {
