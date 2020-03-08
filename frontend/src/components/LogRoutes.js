@@ -50,6 +50,7 @@ export default class LogRoutes extends Component {
     for(let i = this.state.data.length - 1; i >= 0; i--) {
       let score = this.state.data[i];
       this.scores.push(score);
+      console.log('PUshing');
     }
     
     this.table = this.scores.map((item, key) => 

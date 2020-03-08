@@ -19,16 +19,6 @@ export default class ViewScore extends Component {
     this.scores = [];
     this.table = [];
 
-    this.onSubmitHandler = this.onSubmitHandler.bind(this);
-  }
-
-  // Upon submission, call API
-  onSubmitHandler(event) {
-    event.preventDefault();
-    
-  }
-
-  render() {
     let url = "https://cs48-climb-backend.herokuapp.com/scores/" + localStorage.getItem('username') + "/" + localStorage.getItem('comp');
     axios.get(url).then(response => this.setState({data: response.data}));
     
@@ -51,6 +41,9 @@ export default class ViewScore extends Component {
         <td>{item[1]}</td>
       </tr>
     );
+  }
+
+  render() {
     return (
       <>
         <NavBar></NavBar>
