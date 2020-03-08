@@ -1,4 +1,3 @@
-var uuidv1 = require('uuid/v1');
 var cors = require('cors');
 var express = require('express');
 var bodyParser = require("body-parser");
