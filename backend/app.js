@@ -265,12 +265,29 @@ app.patch('/scores/log/:name/:comp', function(req, res) {
     if (problem > response.rows[0].num_of_problems) {
       res.status(400).json('invalid problem number');
     } else {
-      pool.query("UPDATE scores SET problems[CARDINALITY(problems)+1] = ROW("+ problem +","+ attempts +") where user_name= '"+ req.params.name + "' and comp= '"+ req.params.comp +"';", (err, response) => {
 
-      if (err){
-        res.send(err);
-      }
-      res.send(response);
+      pool.query("SELECT problems FROM scores where user_name='"+req.params.name+"' and comp='"+req.params.comp+"';", (err, response) => {
+        if (err) {
+          res.send(err);
+        }
+        var not_there = true;
+        var problems = JSON.parse(response.rows[0].problems.split("\"(").join("[").split(")\"").join("]").split("{").join("[").split("}").join("]"));
+        for(i = 0; i < problems.length; i++){
+          if(problems[i][0] == problem)
+            not_there = false
+        }
+        if(not_there){
+          pool.query("UPDATE scores SET problems[CARDINALITY(problems)+1] = ROW("+ problem +","+ attempts +") where user_name= '"+ req.params.name + "' and comp= '"+ req.params.comp +"';", (err, response) => {
+
+          if (err){
+            res.send(err);
+          }
+          res.send(response);
+          });
+        }
+        else{
+          res.status(400).json('problem already completed')
+        }
       });
     }
   });
