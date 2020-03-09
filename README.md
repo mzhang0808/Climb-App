@@ -15,12 +15,13 @@ Climb! is a web application that improves the climbing competition experience by
 For the minimum viable product:
 - Competitors can create a competition
 - Competitors can register for a competition
-- Competitors can upload scores
-- Competitors can view automatically calculated results
+- Competitors can log routes
+- Competitors can view top 3 climbs
 
 For the final sprint:
-- Competitors can have climbing scores verified digitally
-- Competitors can view past competitions and scores
+- Competitors can verify their logged routes
+- Competitors can view past logged routes for a competition
+- Competitors can view their tentative final score
 
 ## Installation
 
@@ -36,7 +37,7 @@ For the final sprint:
 - React (v6.13.4): Allows for the creation of web components for the frontend
 - React Router (v6.13.4): Allows for routing of pages in the frontend
 - React Router DOM (v6.13.4): Allows for routing of pages in the frontend
-- Axios (v6.13.4): Allows for creating and handling API calls to the backend
+- Axios (v6.13.4): Allows for creating and handling API requests to the backend
 
 ### Installation Steps
 
@@ -109,20 +110,22 @@ Once you have set up the backend with Heroku, you can add database functionality
   a. Unit tests.
   <pre>mocha test/unit</pre>
 
-
 ## Functionality
 
-Here are our <a href="https://cs48-climb-frontend.herokuapp.com">frontend</a> and <a href="https://cs48-climb-backend.herokuapp.com">backend</a> in production.
+Here are our <a href="http://cs48-climb-frontend.herokuapp.com">frontend</a> and <a href="http://cs48-climb-backend.herokuapp.com">backend</a> in production.
 
 - Navigate to the homepage.
-- Click on "Get Started" or "Sign Up" and create an account. If you already have an account, click on "Log In" and log in.
-- Click on "Create Competition" and create a competition. If a competition already exists, click on "Join Competition" and join the competition.
-- Click on "Log Scores" and log scores for a given competition and route. You can view your scores for the given competition and for all competition.
-- Click on "View Scores" and view the top 3 scores for a given competition.
+- Click on "Get Started" or "Sign Up" on the navigation bar and create an account. If you already have an account, click on "Log In" and log in.
+- Click on "Competitions" to create or join a competition.
+- Click on "Create Competition" and create a competition. If your competition already exists, click on "Join Competition" and join the competition.
+- Click on "Log Routes" and log routes for a given competition and route number. You must have two witnesses whose usernames must be submitted with your logged route. You now see all of your logged climbs for your current competition.
+- Click on "View Score" and view the top 3 climbs and your tentative final score for your current competition.
+- Click on "Log Out" on the navigation bar.
 
 ## Known Problems
 
-- Some of the submit buttons need to be clicked twice before the user receives any feedback
+- Restarting the backend Heroku dyno from an API call causes a delay of several seconds
+- There is a very slight delay in showing top 3 table in "View Score"
 
 ## Contributing
 
