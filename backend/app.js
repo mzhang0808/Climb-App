@@ -236,16 +236,38 @@ app.post('/scores', function(req, res) {
 });
 
 app.get('/scores/:name/:comp', function(req, res) {
-    pool.query("SELECT problems FROM scores where user_name='"+req.params.name+"' and comp='"+req.params.comp+"';", (err, response) => {
-      if (err) {
-        res.send(err);
+  var user = req.params.name;
+  var comp = req.params.comp;
+  pool.query("SELECT COUNT(*) FROM users WHERE user_name = '" + user + "';", (err, response) => {
+    if (err){
+            res.send(err);
+          }
+    if(response.rows[0].count != 0){ 
+      pool.query("SELECT COUNT(*) FROM competitions WHERE comp_name = '" + comp + "';", (err, response) => {
+        if (err){
+            res.send(err);
+          }
+        if(response.rows[0].count != 0){
+        pool.query("SELECT problems FROM scores where user_name='"+ user +"' and comp='"+ comp +"';", (err, response) => {
+          if (err) {
+            res.send(err);
+          }
+          var problems = JSON.parse(response.rows[0].problems.split("\"(").join("[").split(")\"").join("]").split("{").join("[").split("}").join("]"));
+          var sorted = problems.sort(function(a, b){
+            return b[0] - a[0];
+          })
+          res.send(problems);
+        });
       }
-      var problems = JSON.parse(response.rows[0].problems.split("\"(").join("[").split(")\"").join("]").split("{").join("[").split("}").join("]"));
-      var sorted = problems.sort(function(a, b){
-        return b[0] - a[0];
-      })
-      res.send(problems);
+      else{
+        res.status(400).json('no such comp')
+      }
     });
+    }
+    else{
+      res.status(400).json('no such user')
+    }
+  });
 });
 
 app.patch('/scores/log/:name/:comp', function(req, res) {
