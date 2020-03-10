@@ -27,8 +27,8 @@ export default class HomePage extends Component {
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Competitions<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/competitions/create">Create Competition</a></li>
-            <li><a href="/competitions/join">Join Competition</a></li>
+            <li><a href="/competitions/create">Create</a></li>
+            <li><a href="/competitions/join">Join</a></li>
           </ul>
         </li>
         <li><a href="/scores/log">Log Routes</a></li>

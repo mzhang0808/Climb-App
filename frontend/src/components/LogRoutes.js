@@ -42,7 +42,7 @@ export default class LogRoutes extends Component {
       attempts: this.state.attempts,
       key1: this.state.key1,
       key2: this.state.key2
-    });
+    })
 
     url = "https://cs48-climb-backend.herokuapp.com/scores/" + localStorage.getItem('username') + "/" + localStorage.getItem('comp');
     axios.get(url);
@@ -74,6 +74,7 @@ export default class LogRoutes extends Component {
         <div class="container">
           <div class="row">
             <div class="col-lg-12">
+              <h3>Log a Route</h3>
               <form onSubmit={this.onSubmitHandler}>
                 <div class="form-group">
                   <label>Route #</label>

@@ -48,6 +48,7 @@ export default class CreateCompetition extends Component {
         <div class="container">
           <div class="row">
             <div class="col-lg-12">
+              <h3>Create a Competition</h3>
               <form onSubmit={this.onSubmitHandler}>
                 <div class="form-group">
                   <label>Competition Name</label>
