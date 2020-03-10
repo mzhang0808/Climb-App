@@ -14,13 +14,13 @@ Climb! is a web application that improves the climbing competition experience by
 
 For the minimum viable product:
 - Competitors can create a competition
-- Competitors can register for a competition
+- Competitors can join a competition
 - Competitors can log routes
-- Competitors can view top 3 climbs
+- Competitors can view top climbs
 
 For the final sprint:
-- Competitors can verify their logged routes
-- Competitors can view past logged routes for a competition
+- Competitors can have their logged routes verified
+- Competitors can view their past logged routes for a competition
 - Competitors can view their tentative final score
 
 ## Installation
