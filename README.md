@@ -8,7 +8,7 @@ Climb! is a web application that improves the climbing competition experience by
 
 ### Additional information about the project
 
-**Target Audience**: Athletes in climbing competitions
+**Target Audience**: Competitive climbers
 
 **Main Functionality**
 
