@@ -95,9 +95,7 @@ Once you have set up the backend with Heroku, you can add database functionality
 
 ### Testing
 
-**Frontend**
-
-**Backend: Mocha.js**
+**Mocha.js**
 1. Install Mocha.js dependancies.
 <pre>npm install mocha</pre>
 <pre>npm install chai</pre>
