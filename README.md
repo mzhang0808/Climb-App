@@ -8,19 +8,19 @@ Climb! is a web application that improves the climbing competition experience by
 
 ### Additional information about the project
 
-**Target Audience**: Athletes in climbing competitions
+**Target Audience**: Competitive climbers
 
 **Main Functionality**
 
 For the minimum viable product:
 - Competitors can create a competition
-- Competitors can register for a competition
+- Competitors can join a competition
 - Competitors can log routes
-- Competitors can view top 3 climbs
+- Competitors can view top climbs
 
 For the final sprint:
-- Competitors can verify their logged routes
-- Competitors can view past logged routes for a competition
+- Competitors can have their logged routes verified
+- Competitors can view their past logged routes for a competition
 - Competitors can view their tentative final score
 
 ## Installation
@@ -95,9 +95,7 @@ Once you have set up the backend with Heroku, you can add database functionality
 
 ### Testing
 
-**Frontend**
-
-**Backend: Mocha.js**
+**Mocha.js**
 1. Install Mocha.js dependancies.
 <pre>npm install mocha</pre>
 <pre>npm install chai</pre>
